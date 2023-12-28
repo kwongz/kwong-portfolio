@@ -1,39 +1,40 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 function Cell({
 	status,
-	index,
-	gameMatrix,
-	setGameMatrix,
-	playerTurn,
-	setPlayerTurn,
-	checkWinner,
-	setWinner,
+	onClick,
+	// index,
+	// gameMatrix,
+	// setGameMatrix,
+	// playerTurn,
+	// setPlayerTurn,
+	// checkWinner,
+	// setWinner,
 }) {
-	const [cellStatus, setCellStatus] = useState(status);
+	// const [cellStatus, setCellStatus] = useState(status);
 
-	useEffect(() => {
-		const winner = checkWinner(gameMatrix);
-		if (winner) {
-			setWinner(winner);
-		}
-	}, [gameMatrix]);
+	// useEffect(() => {
+	// 	const winner = checkWinner(gameMatrix);
+	// 	if (winner) {
+	// 		setWinner(winner);
+	// 	}
+	// }, [gameMatrix]);
 
-	const updateGameMatrix = () => {
-		let updatedGameMatrix = [...gameMatrix];
-		updatedGameMatrix[index] = playerTurn;
-		setGameMatrix(updatedGameMatrix);
-	};
+	// const updateGameMatrix = () => {
+	// 	let updatedGameMatrix = [...gameMatrix];
+	// 	updatedGameMatrix[index] = playerTurn;
+	// 	setGameMatrix(updatedGameMatrix);
+	// };
 
-	const handleClick = () => {
-		setCellStatus(playerTurn);
-		updateGameMatrix();
-		setPlayerTurn(playerTurn === "X" ? "O" : "X");
-	};
+	// const handleClick = () => {
+	// 	setCellStatus(playerTurn);
+	// 	updateGameMatrix();
+	// 	setPlayerTurn(playerTurn === "X" ? "O" : "X");
+	// };
 
 	return (
-		<div className="cell" onClick={handleClick}>
-			{cellStatus}
+		<div className="cell" onClick={onClick}>
+			{status}
 		</div>
 	);
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import Cell from "./Cell";
 import WinnerBanner from "./WinnerBanner";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Gameboard() {
 	const [playerTurn, setPlayerTurn] = useState("X");
@@ -34,6 +34,22 @@ function Gameboard() {
 		[2, 4, 6], // Diagonal from top-right to bottom-left
 	];
 
+	useEffect(() => {
+		const winner = checkWinner(gameMatrix);
+		if (winner) {
+			setWinner(winner);
+		}
+	}, [gameMatrix]);
+
+	const handleClick = (index) => {
+		if (gameMatrix[index] === null) {
+			const updatedGameMatrix = [...gameMatrix]; // Create a copy of the gameMatrix
+			updatedGameMatrix[index] = playerTurn; // Update only the clicked cell
+			setGameMatrix(updatedGameMatrix); // Update the gameMatrix state
+			setPlayerTurn(playerTurn === "X" ? "O" : "X"); // Toggle player turn
+		}
+	};
+
 	function checkWinner(gameMatrix) {
 		if (gameMatrix === undefined) {
 			return null; // Or handle the undefined case as needed
@@ -56,18 +72,7 @@ function Gameboard() {
 	return (
 		<div className="gameboard">
 			{gameMatrix.map((status, index) => (
-				<Cell
-					key={index}
-					status={status}
-					index={index}
-					gameMatrix={gameMatrix}
-					setGameMatrix={setGameMatrix}
-					playerTurn={playerTurn}
-					setPlayerTurn={setPlayerTurn}
-					checkWinner={checkWinner}
-					setWinner={setWinner}
-					winner={winner}
-				/>
+				<Cell onClick={() => handleClick(index)} key={index} status={status} />
 			))}
 			<WinnerBanner winner={winner} />
 		</div>
