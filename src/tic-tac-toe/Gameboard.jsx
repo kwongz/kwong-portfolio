@@ -1,6 +1,7 @@
 import React from "react";
 import Cell from "./Cell";
 import WinnerBanner from "./WinnerBanner";
+import ScoreBoard from "./ScoreBoard";
 import { useState, useEffect } from "react";
 
 function Gameboard() {
@@ -17,6 +18,11 @@ function Gameboard() {
 		null,
 	]);
 	const [winner, setWinner] = useState(null);
+	const [showWinnerBanner, setShowWinnerBanner] = useState(false);
+
+	const showWinner = () => {
+		setShowWinnerBanner(true);
+	};
 
 	const winningCombinations = [
 		// Rows
@@ -41,7 +47,7 @@ function Gameboard() {
 		}
 	}, [gameMatrix]);
 
-	const handleClick = (index) => {
+	const handleTurn = (index) => {
 		if (gameMatrix[index] === null) {
 			const updatedGameMatrix = [...gameMatrix]; // Create a copy of the gameMatrix
 			updatedGameMatrix[index] = playerTurn; // Update only the clicked cell
@@ -50,7 +56,7 @@ function Gameboard() {
 		}
 	};
 
-	function checkWinner(gameMatrix) {
+	const checkWinner = (gameMatrix) => {
 		if (gameMatrix === undefined) {
 			return null; // Or handle the undefined case as needed
 		}
@@ -63,18 +69,39 @@ function Gameboard() {
 				gameMatrix[a] === gameMatrix[c]
 			) {
 				setWinner(gameMatrix[a]);
+				setShowWinnerBanner(true);
 				return gameMatrix[a]; // Return 'X' or 'O' as the winner
 			}
 		}
 		return null; // Return null if there's no winner yet
-	}
+	};
+
+	const handleRestart = () => {
+		setGameMatrix([null, null, null, null, null, null, null, null, null]);
+		setPlayerTurn("X");
+		setShowWinnerBanner(false);
+		setWinner(null);
+	};
 
 	return (
-		<div className="gameboard">
-			{gameMatrix.map((status, index) => (
-				<Cell onClick={() => handleClick(index)} key={index} status={status} />
-			))}
-			<WinnerBanner winner={winner} />
+		<div className="tic-tac-toe-container">
+			<ScoreBoard />
+			<div className="gameboard">
+				{gameMatrix.map((status, index) => (
+					<Cell
+						handleTurn={() => handleTurn(index)}
+						key={index}
+						status={status}
+					/>
+				))}
+				{showWinnerBanner && (
+					<div className="overlay">
+						<div className="winner-banner-container">
+							<WinnerBanner winner={winner} handleRestart={handleRestart} />
+						</div>
+					</div>
+				)}
+			</div>
 		</div>
 	);
 }

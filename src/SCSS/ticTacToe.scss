@@ -20,3 +20,33 @@
     align-items: center;
     font-size: 24px;
   }
+
+  // winner banner styling  
+
+/* CSS */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* semi-transparent black background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.winner-banner-container {
+  /* Style your winner banner here */
+  display: block;
+  text-align: center;
+  background-color: white; /* Example background color for the winner banner */
+  padding: 15px;
+  border-radius: 8px;
+  /* Other styles for positioning, size, etc. */
+}
+
+.restart {
+  display: block;
+  margin: 10px;
+}
