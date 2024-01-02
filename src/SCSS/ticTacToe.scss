@@ -1,52 +1,169 @@
+// Variables
+$silver: #C0C0C0; 
+$gunmetal: #2C3539; 
+$brushedSteel: #B0C4DE; 
+$MetallicRed: #B30000; 
+$MetallicBlue: #0066CC; 
 
-
+// Gameboard styling with variables
 .gameboard {
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr); 
-    gap: 5px; 
-    width: 500px; 
-    height: 500px; 
-    border: 2px solid #333; 
-    margin-top: 50px;
-  }
-  
-  .cell {
-    background-color: #fff; 
-    border: 1px solid #ccc; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 24px;
-  }
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 5px;
+  width: 500px;
+  height: 500px;
+  border: 2px solid #333;
+  margin-top: 50px;
+  border: 2px solid $silver;
+  border-radius: 20px;
+  background-color: $gunmetal;
+  box-shadow:
+    0 0 5px rgba(255, 255, 255, 0.5),
+    0 0 15px rgba(0, 0, 0, 0.8);
+}
 
-  // winner banner styling  
+// Cell styling with variables
+.cell {
+  background-color: $gunmetal;
+  border: 1px solid $silver;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 75px;
+  box-shadow:
+    0 0 5px rgba(255, 255, 255, 0.5),
+    0 0 15px rgba(0, 0, 0, 0.8);
+  transition: 0.4s ease-in-out;
+}
+.cell:empty:hover {
+  transition: transform 0.4s ease-in-out;
+  transform: scale(1.1);
+}
 
-/* CSS */
+/* Assigning colors for X and O */
+.x-mark {
+  color: #B30000; 
+  text-shadow: 1px 1px 2px #8C001A; 
+}
+
+.o-mark {
+  color: #0066CC; 
+  text-shadow: 1px 1px 2px #00457A; 
+}
+
+.x-mark,
+.o-mark {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+  background-color: #808080; 
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 15px rgba(0, 0, 0, 0.8);
+  pointer-events: none;
+  transform: scale(0.95);
+}
+
+// Winner banner styling
+/* Styling for overlay */
 .overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7); /* semi-transparent black background */
+  background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+/* Styling for winner banner container */
 .winner-banner-container {
-  /* Style your winner banner here */
-  display: block;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 250px;
+  height: 250px;
   text-align: center;
-  background-color: white; /* Example background color for the winner banner */
+  background-color: #B0C4DE; 
   padding: 15px;
   border-radius: 8px;
-  /* Other styles for positioning, size, etc. */
+  box-shadow: 
+    0 0 5px rgba(255, 255, 255, 0.5), 
+    0 0 15px rgba(0, 0, 0, 0.8); 
 }
 
+/* Styling for restart button */
 .restart {
   display: block;
   margin: 10px;
+  margin-top: 30px;
+  width: 100px;
+  height: 40px;
+  background-color: #B0C4DE; 
+  color: #333;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 
+    0 0 5px rgba(255, 255, 255, 0.5), 
+    0 0 15px rgba(0, 0, 0, 0.8); 
+    &:hover{
+      background-color:$gunmetal;
+      color:$silver;
+    }
 }
+
+// Scoreboard Styling
+.scoreboard-container {
+  display: block;
+  margin: 0 auto;
+  width: 500px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 50px;
+  position: relative;
+  z-index: 100;
+
+  > :first-child {
+    color: $MetallicRed;
+  }
+
+  > :nth-child(2) {
+    color: $MetallicBlue;
+  }
+
+  div {
+    background-color: $silver;
+    width: 200px;
+    text-align: center;
+    font-size: 25px;
+    border-radius: 20px;
+    border: 2px solid $gunmetal;
+    box-shadow:
+      0 0 5px rgba(255, 255, 255, 0.5),
+      0 0 15px rgba(0, 0, 0, 0.8);
+
+  }
+}
+
+// handle animation on win
+.animate-score {
+  background-image: linear-gradient(to right, #ff9999, #99ccff); 
+  background-size: 200% 100%;
+  animation: scoreboardAndFlash 1s linear forwards infinite alternate;
+}
+
+@keyframes scoreboardAndFlash {
+  0% {
+    background-position: 0% 50%;
+    border-color: transparent; 
+  }
+  100% {
+    background-position: 100% 50%;
+    border-color: black; 
+  }
+}
+
+

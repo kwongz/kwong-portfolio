@@ -19,10 +19,7 @@ function Gameboard() {
 	]);
 	const [winner, setWinner] = useState(null);
 	const [showWinnerBanner, setShowWinnerBanner] = useState(false);
-
-	const showWinner = () => {
-		setShowWinnerBanner(true);
-	};
+	const [score, setScore] = useState({ X: 0, O: 0 });
 
 	const winningCombinations = [
 		// Rows
@@ -49,16 +46,22 @@ function Gameboard() {
 
 	const handleTurn = (index) => {
 		if (gameMatrix[index] === null) {
-			const updatedGameMatrix = [...gameMatrix]; // Create a copy of the gameMatrix
-			updatedGameMatrix[index] = playerTurn; // Update only the clicked cell
-			setGameMatrix(updatedGameMatrix); // Update the gameMatrix state
-			setPlayerTurn(playerTurn === "X" ? "O" : "X"); // Toggle player turn
+			const updatedGameMatrix = [...gameMatrix];
+			updatedGameMatrix[index] = playerTurn;
+			setGameMatrix(updatedGameMatrix);
+			setPlayerTurn(playerTurn === "X" ? "O" : "X");
 		}
+	};
+
+	const handleScore = (winnerPlayer) => {
+		const updatedScore = { ...score };
+		updatedScore[winnerPlayer] = updatedScore[winnerPlayer] + 1;
+		setScore(updatedScore);
 	};
 
 	const checkWinner = (gameMatrix) => {
 		if (gameMatrix === undefined) {
-			return null; // Or handle the undefined case as needed
+			return null;
 		}
 
 		for (let combination of winningCombinations) {
@@ -69,6 +72,7 @@ function Gameboard() {
 				gameMatrix[a] === gameMatrix[c]
 			) {
 				setWinner(gameMatrix[a]);
+				handleScore(gameMatrix[a]);
 				setShowWinnerBanner(true);
 				return gameMatrix[a]; // Return 'X' or 'O' as the winner
 			}
@@ -85,7 +89,7 @@ function Gameboard() {
 
 	return (
 		<div className="tic-tac-toe-container">
-			<ScoreBoard />
+			<ScoreBoard xScore={score.X} oScore={score.O} winner={winner} />
 			<div className="gameboard">
 				{gameMatrix.map((status, index) => (
 					<Cell
