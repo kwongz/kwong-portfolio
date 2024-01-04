@@ -3,7 +3,7 @@ import React from "react";
 function WinnerBanner({ winner, handleRestart }) {
 	return (
 		<div className="winnerBanner">
-			{winner} Wins
+			Player {winner} Wins
 			<button className="restart" onClick={() => handleRestart()}>
 				Restart
 			</button>

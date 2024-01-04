@@ -1,3 +1,85 @@
+// Variables
+$silver: #C0C0C0; 
+$gunmetal: #2C3539; 
+$brushedSteel: #B0C4DE; 
+$MetallicRed: #B30000; 
+$MetallicBlue: #0066CC; 
+
 * {
     box-sizing: border-box;
   }
+
+  .gameboard {
+    margin: 0 auto;
+    display: grid;
+    margin-top: 50px;
+    border: 2px solid $silver;
+    border-radius: 20px;
+    background-color: $gunmetal;
+    box-shadow:
+      0 0 5px rgba(255, 255, 255, 0.5),
+      0 0 15px rgba(0, 0, 0, 0.8);
+  }
+
+  .Zero-score-button {
+    display: inline-block;
+    margin-top: 50px;
+    color: $silver;
+    background-color: $gunmetal;
+    width: 200px;
+    border-radius: 20px;
+    padding: 10px;
+    font-size: 20px;
+    margin-left: 10px;
+    border: 3px solid black;
+
+    &:hover {
+      background-color: $silver;
+      color: $gunmetal;
+      cursor: pointer;
+    }
+  }
+
+  // Scoreboard Styling
+.scoreboard-container {
+  display: block;
+  margin: 0 auto;
+  width: 500px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 50px;
+  position: relative;
+  z-index: 100;
+
+  > :first-child {
+    color: $MetallicRed;
+  }
+
+  > :nth-child(2) {
+    color: $MetallicBlue;
+  }
+  div {
+    background-color: $silver;
+    width: 225px;
+    text-align: center;
+    font-size: 25px;
+    border-radius: 20px;
+    border: 2px solid $gunmetal;
+    box-shadow:
+      0 0 5px rgba(255, 255, 255, 0.5),
+      0 0 15px rgba(0, 0, 0, 0.8);
+
+  }
+}
+
+.player-turn-banner{
+  display: inline-block;
+  margin-top: 50px;
+  color: $silver;
+  background-color: $gunmetal;
+  width: 200px;
+  border-radius: 20px;
+  padding: 10px;
+  font-size: 20px;
+}

@@ -12,7 +12,7 @@ function NavBar() {
 					<Link to="/tic-tac-toe">Tic-tac-toe</Link>
 				</li>
 				<li>
-					<a>Project 2</a>
+					<Link to="/connect4">Connect 4</Link>
 				</li>
 				<li>
 					<a>Project 3</a>

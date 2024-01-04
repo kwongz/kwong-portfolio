@@ -1,7 +1,8 @@
 import React from "react";
 import "./SCSS/app.scss";
 import NavBar from "./Components/NavBar.jsx";
-import Gameboard from "./tic-tac-toe/Gameboard.jsx";
+import Tictactoe from "./gameComponents/Tictactoe.jsx";
+import Connect4 from "./gameComponents/Connect4.jsx";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -10,8 +11,8 @@ function App() {
 			<div className="App">
 				<NavBar />
 				<Routes>
-					<Route path="/" element={<h1>hello</h1>} />
-					<Route path="/tic-tac-toe" element={<Gameboard />} />
+					<Route path="/connect4" element={<Connect4 />} />
+					<Route path="/tic-tac-toe" element={<Tictactoe />} />
 				</Routes>
 			</div>
 		</Router>
