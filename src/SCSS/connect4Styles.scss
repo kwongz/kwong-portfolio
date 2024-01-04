@@ -1,0 +1,15 @@
+.connect4-container {
+  text-align: center;
+  .gameboard{
+      grid-template-columns: repeat(7, 1fr);
+      grid-template-rows: repeat(6, 1fr);
+      width: 600px;
+      height: 600px;
+      .cell {
+        border-radius: 50%;
+        /* Other cell-specific styles */
+        margin: 10px 5px;
+      }
+}
+}
+  

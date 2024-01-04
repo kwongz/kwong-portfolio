@@ -4,8 +4,8 @@ import WinnerBanner from "./WinnerBanner";
 import ScoreBoard from "./ScoreBoard";
 import { useState, useEffect } from "react";
 
-function Gameboard() {
-	const [playerTurn, setPlayerTurn] = useState("X");
+function Tictactoe() {
+	const [playerTurn, setPlayerTurn] = useState(1);
 	const [gameMatrix, setGameMatrix] = useState([
 		null,
 		null,
@@ -19,7 +19,7 @@ function Gameboard() {
 	]);
 	const [winner, setWinner] = useState(null);
 	const [showWinnerBanner, setShowWinnerBanner] = useState(false);
-	const [score, setScore] = useState({ X: 0, O: 0 });
+	const [score, setScore] = useState({ player1: 0, player2: 0 });
 
 	const winningCombinations = [
 		// Rows
@@ -49,13 +49,14 @@ function Gameboard() {
 			const updatedGameMatrix = [...gameMatrix];
 			updatedGameMatrix[index] = playerTurn;
 			setGameMatrix(updatedGameMatrix);
-			setPlayerTurn(playerTurn === "X" ? "O" : "X");
+			setPlayerTurn(playerTurn === 1 ? 2 : 1);
 		}
 	};
 
 	const handleScore = (winnerPlayer) => {
 		const updatedScore = { ...score };
-		updatedScore[winnerPlayer] = updatedScore[winnerPlayer] + 1;
+		updatedScore[`player${winnerPlayer}`] =
+			updatedScore[`player${winnerPlayer}`] + 1;
 		setScore(updatedScore);
 	};
 
@@ -82,20 +83,32 @@ function Gameboard() {
 
 	const handleRestart = () => {
 		setGameMatrix([null, null, null, null, null, null, null, null, null]);
-		setPlayerTurn("X");
+		setPlayerTurn(1);
 		setShowWinnerBanner(false);
 		setWinner(null);
 	};
 
 	return (
 		<div className="tic-tac-toe-container">
-			<ScoreBoard xScore={score.X} oScore={score.O} winner={winner} />
+			<ScoreBoard
+				player1={score.player1}
+				player2={score.player2}
+				winner={winner}
+				gameMode={"tic-tac-toe"}
+			/>
+			<div className="player-turn-banner">Player {playerTurn}'s Turn</div>
+			<button
+				className="Zero-score-button"
+				onClick={() => setScore({ player1: 0, player2: 0 })}>
+				Reset Scores
+			</button>
 			<div className="gameboard">
 				{gameMatrix.map((status, index) => (
 					<Cell
-						handleTurn={() => handleTurn(index)}
-						key={index}
 						status={status}
+						key={index}
+						handleTurn={() => handleTurn(index)}
+						gameMode={"tic-tac-toe"}
 					/>
 				))}
 				{showWinnerBanner && (
@@ -110,4 +123,4 @@ function Gameboard() {
 	);
 }
 
-export default Gameboard;
+export default Tictactoe;

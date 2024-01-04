@@ -1,27 +1,21 @@
-// Variables
-$silver: #C0C0C0; 
-$gunmetal: #2C3539; 
-$brushedSteel: #B0C4DE; 
-$MetallicRed: #B30000; 
-$MetallicBlue: #0066CC; 
+// // Variables
+// $silver: #C0C0C0; 
+// $gunmetal: #2C3539; 
+// $brushedSteel: #B0C4DE; 
+// $MetallicRed: #B30000; 
+// $MetallicBlue: #0066CC; 
 
 // Gameboard styling with variables
-.gameboard {
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  gap: 5px;
-  width: 500px;
-  height: 500px;
-  border: 2px solid #333;
-  margin-top: 50px;
-  border: 2px solid $silver;
-  border-radius: 20px;
-  background-color: $gunmetal;
-  box-shadow:
-    0 0 5px rgba(255, 255, 255, 0.5),
-    0 0 15px rgba(0, 0, 0, 0.8);
+.tic-tac-toe-container {
+  text-align: center;
+
+  .gameboard {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 5px;
+    width: 500px;
+    height: 500px;
+  }
 }
 
 // Cell styling with variables
@@ -112,40 +106,6 @@ $MetallicBlue: #0066CC;
       background-color:$gunmetal;
       color:$silver;
     }
-}
-
-// Scoreboard Styling
-.scoreboard-container {
-  display: block;
-  margin: 0 auto;
-  width: 500px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 50px;
-  position: relative;
-  z-index: 100;
-
-  > :first-child {
-    color: $MetallicRed;
-  }
-
-  > :nth-child(2) {
-    color: $MetallicBlue;
-  }
-
-  div {
-    background-color: $silver;
-    width: 200px;
-    text-align: center;
-    font-size: 25px;
-    border-radius: 20px;
-    border: 2px solid $gunmetal;
-    box-shadow:
-      0 0 5px rgba(255, 255, 255, 0.5),
-      0 0 15px rgba(0, 0, 0, 0.8);
-
-  }
 }
 
 // handle animation on win
