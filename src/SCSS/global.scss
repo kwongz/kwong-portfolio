@@ -12,9 +12,6 @@ $MetallicBlue: #0066CC;
   .gameboard {
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    border: 2px solid #333;
     margin-top: 50px;
     border: 2px solid $silver;
     border-radius: 20px;

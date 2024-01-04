@@ -26,7 +26,14 @@ function Connect4() {
 		for (let i = 0; i < gameMatrix.length; i++) {
 			for (let j = 0; j < gameMatrix[i].length; j++) {
 				// Create Cell components for each position in the game matrix
-				board.push(<Cell key={`${i}-${j}`} value={gameMatrix[i][j]} />);
+				board.push(
+					<Cell
+						key={`${i}-${j}`}
+						status={gameMatrix[i][j]}
+						handleTurn={() => handleTurn(j)}
+						gameMode={"connect4"}
+					/>
+				);
 			}
 		}
 		return board;
@@ -39,13 +46,18 @@ function Connect4() {
 		}
 	}, [gameMatrix]);
 
-	const handleTurn = (index) => {
-		if (gameMatrix[index] === null) {
-			const updatedGameMatrix = [...gameMatrix];
-			updatedGameMatrix[index] = playerTurn;
-			setGameMatrix(updatedGameMatrix);
-			setPlayerTurn(playerTurn === 1 ? 2 : 1);
+	const handleTurn = (column) => {
+		// loop through the rows in the selected column to check if they are empty, if it is empty fill it with the player, change plaeyrs and exit loop
+		for (let i = 5; i >= 0; i--) {
+			if (gameMatrix[i][column] === null) {
+				const updatedGameMatrix = [...gameMatrix];
+				updatedGameMatrix[i][column] = playerTurn;
+				setGameMatrix(updatedGameMatrix);
+				setPlayerTurn(playerTurn === 1 ? 2 : 1);
+				return;
+			}
 		}
+		console.log("end of handle turn");
 	};
 
 	const handleScore = (winnerPlayer) => {

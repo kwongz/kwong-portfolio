@@ -4,7 +4,6 @@ function ScoreBoard({ player1, player2, winner, gameMode }) {
 	const [playerIcons, setPlayerIcons] = useState({});
 
 	useEffect(() => {
-		console.log(gameMode);
 		if (gameMode === "tic-tac-toe") {
 			const newIcons = { player1Icon: "X", player2Icon: "O" };
 			setPlayerIcons(newIcons);
