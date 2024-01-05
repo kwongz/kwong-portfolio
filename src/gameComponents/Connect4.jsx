@@ -11,7 +11,7 @@ function Connect4() {
 
 	// Connect 4 State
 	const [playerTurn, setPlayerTurn] = useState(1);
-	const [winner, setWinner] = useState(null);
+	const [winner, setWinner] = useState(false);
 	const [showWinnerBanner, setShowWinnerBanner] = useState(false);
 	const [score, setScore] = useState({ player1: 0, player2: 0 });
 	const [gameMatrix, setGameMatrix] = useState(
@@ -30,23 +30,24 @@ function Connect4() {
 					<Cell
 						key={`${i}-${j}`}
 						status={gameMatrix[i][j]}
-						handleTurn={() => handleTurn(j)}
+						handleTurn={() => handleTurn(i, j)}
 						gameMode={"connect4"}
+						connect4Position={`${i}-${j}`}
 					/>
 				);
 			}
 		}
 		return board;
 	};
+// No longer need this, will check winner after each HandleTurn
+	// useEffect(() => {
+	// 	const winner = checkWinner(gameMatrix);
+	// 	if (winner) {
+	// 		setWinner(winner);
+	// 	}
+	// }, [gameMatrix]);
 
-	useEffect(() => {
-		const winner = checkWinner(gameMatrix);
-		if (winner) {
-			setWinner(winner);
-		}
-	}, [gameMatrix]);
-
-	const handleTurn = (column) => {
+	const handleTurn = (row, column) => {
 		// loop through the rows in the selected column to check if they are empty, if it is empty fill it with the player, change plaeyrs and exit loop
 		for (let i = 5; i >= 0; i--) {
 			if (gameMatrix[i][column] === null) {
@@ -54,10 +55,10 @@ function Connect4() {
 				updatedGameMatrix[i][column] = playerTurn;
 				setGameMatrix(updatedGameMatrix);
 				setPlayerTurn(playerTurn === 1 ? 2 : 1);
+				checkWinner(gameMatrix, row, column);
 				return;
 			}
 		}
-		console.log("end of handle turn");
 	};
 
 	const handleScore = (winnerPlayer) => {
@@ -67,16 +68,22 @@ function Connect4() {
 		setScore(updatedScore);
 	};
 
-	const checkWinner = (gameMatrix) => {
-		if (gameMatrix === undefined) {
-			return null;
+	const checkWinner = (gameMatrix, row, column) => {
+		// create a recursive function that checks the surrounding cells around the cell that was just updated with a player's move. If there are 4 consecutive cells filled with the same player, return them as the winner
+		let currentCellDrop = playerTurn
+		let consecutiveCellCount = 0
+		
+		if (gameMatrix[row + 1][column] === currentCellDrop) {
+			consecutiveCellCount = consecutiveCellCount + 1
+			
 		}
+
 
 		return null; // Return null if there's no winner yet
 	};
 
 	const handleRestart = () => {
-		setGameMatrix([null, null, null, null, null, null, null, null, null]);
+		setGameMatrix(Array.from({ length: rows }, () => Array.from({ length: columns }, () => null)));
 		setPlayerTurn(1);
 		setShowWinnerBanner(false);
 		setWinner(null);

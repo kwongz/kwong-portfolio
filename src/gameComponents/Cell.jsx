@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function Cell({ status, handleTurn, gameMode }) {
+function Cell({ status, handleTurn, gameMode, connect4Position }) {
 	const [mark, setMark] = useState("");
 	const [filledCell, setFilledCell] = useState(null);
 
@@ -23,7 +23,7 @@ function Cell({ status, handleTurn, gameMode }) {
 
 	return (
 		<div className={`cell ${mark}`} onClick={handleTurn}>
-			{filledCell}
+			{filledCell} <p style={{ fontSize: '25px' }}>{connect4Position}</p> 
 		</div>
 	);
 }
