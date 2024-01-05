@@ -33,32 +33,12 @@ function Connect4() {
 						handleTurn={() => handleTurn(i, j)}
 						gameMode={"connect4"}
 						connect4Position={`${i}-${j}`}
+						
 					/>
 				);
 			}
 		}
 		return board;
-	};
-// No longer need this, will check winner after each HandleTurn
-	// useEffect(() => {
-	// 	const winner = checkWinner(gameMatrix);
-	// 	if (winner) {
-	// 		setWinner(winner);
-	// 	}
-	// }, [gameMatrix]);
-
-	const handleTurn = (row, column) => {
-		// loop through the rows in the selected column to check if they are empty, if it is empty fill it with the player, change plaeyrs and exit loop
-		for (let i = 5; i >= 0; i--) {
-			if (gameMatrix[i][column] === null) {
-				const updatedGameMatrix = [...gameMatrix];
-				updatedGameMatrix[i][column] = playerTurn;
-				setGameMatrix(updatedGameMatrix);
-				setPlayerTurn(playerTurn === 1 ? 2 : 1);
-				checkWinner(gameMatrix, row, column);
-				return;
-			}
-		}
 	};
 
 	const handleScore = (winnerPlayer) => {
@@ -68,15 +48,33 @@ function Connect4() {
 		setScore(updatedScore);
 	};
 
+	const handleTurn = (row, column) => {
+		console.log(row, column)
+		// loop through the rows in the selected column to check if they are empty, if it is empty fill it with the player, change plaeyrs and exit loop
+		for (let i = 5; i >= 0; i--) {
+			if (gameMatrix[i][column] === null) {
+				const updatedGameMatrix = [...gameMatrix];
+				updatedGameMatrix[i][column] = playerTurn;
+				setGameMatrix(updatedGameMatrix);
+				setPlayerTurn(playerTurn === 1 ? 2 : 1);
+				checkWinner(updatedGameMatrix, row, column);
+				return;
+			}
+		}
+	};
+
+
 	const checkWinner = (gameMatrix, row, column) => {
 		// create a recursive function that checks the surrounding cells around the cell that was just updated with a player's move. If there are 4 consecutive cells filled with the same player, return them as the winner
 		let currentCellDrop = playerTurn
 		let consecutiveCellCount = 0
-		
-		if (gameMatrix[row + 1][column] === currentCellDrop) {
-			consecutiveCellCount = consecutiveCellCount + 1
-			
-		}
+
+		// Define movements that access the game matrix
+		const downColumn = (row, column) => gameMatrix[row + 1][column]; // Access the cell below
+		const upColumn = (row, column) => gameMatrix[row - 1][column];   // Access the cell above
+		const leftRow = (row, column) => gameMatrix[row][column - 1];    // Access the cell to the left
+		const rightRow = (row, column) => gameMatrix[row][column + 1];   // Access the cell to the right
+
 
 
 		return null; // Return null if there's no winner yet
