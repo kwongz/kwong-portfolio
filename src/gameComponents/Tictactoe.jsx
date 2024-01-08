@@ -88,6 +88,12 @@ function Tictactoe() {
 		setWinner(null);
 	};
 
+	const zeroScore = () => {
+		setScore({ player1: 0, player2: 0 });
+		setPlayerTurn(1);
+		setGameMatrix([null, null, null, null, null, null, null, null, null]);
+	};
+
 	return (
 		<div className="tic-tac-toe-container">
 			<ScoreBoard
@@ -97,9 +103,7 @@ function Tictactoe() {
 				gameMode={"tic-tac-toe"}
 			/>
 			<div className="player-turn-banner">Player {playerTurn}'s Turn</div>
-			<button
-				className="Zero-score-button"
-				onClick={() => setScore({ player1: 0, player2: 0 })}>
+			<button className="Zero-score-button" onClick={() => zeroScore()}>
 				Reset Scores
 			</button>
 			<div className="gameboard">
