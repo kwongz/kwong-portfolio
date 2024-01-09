@@ -70,14 +70,15 @@ function Connect4() {
 
 		//create a move list to add to the row and column values directionally move around the board
 		const moveList = {
-			up: { row: -1, column: 0 },
-			down: { row: 1, column: 0 },
-			left: { row: 0, column: -1 },
-			right: { row: 0, column: 1 },
-			upLeft: { row: -1, column: -1 },
-			downRight: { row: 1, column: 1 },
-			upRight: { row: -1, column: 1 },
-			downLeft: { row: 1, column: -1 },
+			up: { row: -1, column: 0}, 
+			down: { row: 1, column: 0},
+			left: { row: 0, column: -1},
+			right: { row: 0, column: 1},
+			upLeft: { row: -1, column: -1},
+			downRight: { row: 1, column: 1},
+			upRight: { row: -1, column: 1},
+			downLeft: { row: 1, column: -1},
+			none: {}
 		};
 
 		let consecutiveCellCount = 0; // outside of loops so they retain their individual counts and dont reset on re-render
@@ -88,84 +89,104 @@ function Connect4() {
 			updatedGameMatrix,
 			droppedCoinRow,
 			droppedCoinColumn,
-			{ row, column }
+			consecutiveCellCount,
+			moveList,
+			direction1,
+			direction2,
+			firstDirection
 		) => {
-			// create a obj to hold the new cell that is being checked
+			const row1 = moveList[direction1].row
+			const column1 = moveList[direction1].column
+			// 
+			const row2 = moveList[direction2].row
+			const column2 = moveList[direction2].column
+			// 
 			const newPos = {
-				row: droppedCoinRow + row,
-				column: droppedCoinColumn + column,
-			};
+				row :  droppedCoinRow + row1,   
+				column: droppedCoinColumn + column1  
+			}
+			const newPos2 = {
+				row: droppedCoinRow + row2,
+				column: droppedCoinColumn + column2
+			}
 			// if the consecutive count has reached 3 then announce winner
-			if (consecutiveCellCount === 3) {
-				return console.log("winner");
+			if (firstDirection === false) {
+				consecutiveCellCount = 0
 			}
-			// if the new position being checked is not out of bounds, and is the same value of the current player, increase the consecutive cell count and call that same function with the same direction.
+			
+			if (consecutiveCellCount === 3) {
+				setWinner(true)
+				return console.log("winner", playerTurn, direction1, direction2);
+			}
+			// 
+
 			else if (
-				newPos.row >= 0 ||
-				newPos.row <= updatedGameMatrix.length ||
-				newPos.column >= 0 ||
-				(newPos.column <= updatedGameMatrix[0].length &&
-					updatedGameMatrix[newPos.row][newPost.column] === playerTurn)
-			)
+				newPos.row >= 0 &&
+				newPos.row < updatedGameMatrix.length &&
+				newPos.column >= 0 &
+				newPos.column <= updatedGameMatrix[0].length &&
+				updatedGameMatrix[newPos.row][newPos.column] === playerTurn &&
+				firstDirection
+			){
 				consecutiveCellCount++;
-			checkDirection(updatedGameMatrix, newPos.row, newPos.column, {
-				row,
-				column,
-			});
-		};
-
-		const checkDown = (row, column) => {
-			if (consecutiveCellCount === 3) {
-				return console.log("winner");
-			} else if (
-				row < updatedGameMatrix.length &&
-				updatedGameMatrix[row][column] === playerTurn
-			) {
+				checkDirection(updatedGameMatrix, newPos.row, newPos.column, consecutiveCellCount,
+					moveList, direction1, direction2, true
+					);
+			} 
+			// 
+			else if (newPos2.row >= 0 &&
+				newPos2.row < updatedGameMatrix.length &&
+				newPos2.column >= 0 &
+				newPos2.column <= updatedGameMatrix[0].length && 
+				updatedGameMatrix[newPos2.row][newPos2.column] === playerTurn) {
+				//if the first direction does not reveal winner, check the 2nd direction
+				
 				consecutiveCellCount++;
-				checkDown(...Object.values(moveDown(row, column)));
-			}
-		}; //End of checkDown
-
-		const checkLeftRight = (row, column, direction) => {
-			//Checks if 3 consecutive cells have been found to be the same as the player's turn, the cell that the player dropped is assumed
-			if (consecutiveCellCount === 3) {
-				return console.log("winner");
-			}
-
-			if (
-				//check that left cell is not out of bounds, cell is same as player, check is moving LEFT
-				column - 1 >= 0 &&
-				updatedGameMatrix[row][column] === playerTurn &&
-				direction === "left"
-			) {
-				// increment count by 1, call function again to check in the LEFT of the last checked cell
-				consecutiveCellCount++;
-				checkLeftRight(...Object.values(moveLeft(row, column)), "left");
-			} else if (direction === "left") {
-				// since no win was found leftwards, keep count and go back to original cell position and check to the RIGHT
-				checkLeftRight(
-					...Object.values(moveRight(droppedCoinRow, droppedCoinColumn)),
-					"right"
+				checkDirection(updatedGameMatrix, newPos2.row, newPos2.column, consecutiveCellCount,
+					moveList, direction1, direction2, false
 				);
 			}
-			//check that right cell is not out of bounds, cell is same as player, check is moving RIGHT
-			if (
-				column + 1 <= updatedGameMatrix[0].length &&
-				updatedGameMatrix[row][column] === playerTurn &&
-				direction === "right"
-			) {
-				// increment count by 1, call function again to check in the RIGHT of the last checked cell
-				consecutiveCellCount++;
-				checkLeftRight(...Object.values(moveRight(row, column)), "right");
-			}
-		}; //End of checkLeftRight
-
-		// initial calls to check directional functions
-		checkDown(...Object.values(moveDown(droppedCoinRow, droppedCoinColumn)));
-		checkLeftRight(
-			...Object.values(moveLeft(droppedCoinRow, droppedCoinColumn)),
-			"left"
-		);
+		};
+		checkDirection(
+			updatedGameMatrix,
+			droppedCoinRow,
+			droppedCoinColumn,
+			consecutiveCellCount,
+			moveList,
+			'down',
+			'none',
+			true,
+		)
+		checkDirection(
+			updatedGameMatrix,
+			droppedCoinRow,
+			droppedCoinColumn,
+			consecutiveCellCount,
+			moveList,
+			'left',
+			'right',
+			true
+		)
+		checkDirection(
+			updatedGameMatrix,
+			droppedCoinRow,
+			droppedCoinColumn,
+			consecutiveCellCount,
+			moveList,
+			'upLeft',
+			'downRight',
+			true
+		)
+		checkDirection(
+			updatedGameMatrix,
+			droppedCoinRow,
+			droppedCoinColumn,
+			consecutiveCellCount,
+			moveList,
+			'upRight',
+			'downLeft',
+			true
+		)
 	}; // End of checkWinner
 
 	const handleRestart = () => {
