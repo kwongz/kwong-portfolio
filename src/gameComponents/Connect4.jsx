@@ -104,7 +104,6 @@ function Connect4() {
 				row: droppedCoinRow + moveList[direction2].row,
 				column: droppedCoinColumn + moveList[direction2].column
 			}
-			
 			//Check logic
 			//if 3 consecutive coins have been counted, return the winner
 			if (consecutiveCellCount === 3) {
@@ -125,6 +124,7 @@ function Connect4() {
 				//	if true, increase count, and keep searching in firstDirection, while adding the new cell coordinates to be searched
 				if (updatedGameMatrix[newPos.row][newPos.column] === playerTurn){
 						consecutiveCellCount++;
+						// console.log('check1', direction1, consecutiveCellCount)
 						checkDirection(updatedGameMatrix, newPos.row, newPos.column, consecutiveCellCount,
 							moveList, direction1, direction2, true
 						);
@@ -133,6 +133,7 @@ function Connect4() {
 				//starts checking cells from the last cell that was checked and moves in the opposite direction while incrementing count
 				} else if (firstDirection){
 				consecutiveCellCount = 0
+				// console.log('switch', direction2, consecutiveCellCount, newPos)
 				checkDirection(updatedGameMatrix, droppedCoinRow, droppedCoinColumn, consecutiveCellCount, moveList, direction1, direction2, false)
 			}
 				//e.g ??0RRR???   ? = unknown cell 0 = cell was null R = player1 Red Cell
@@ -152,13 +153,16 @@ function Connect4() {
 				!firstDirection
 			) {
 				consecutiveCellCount++
+				// console.log('check2', direction2, consecutiveCellCount, newPos2)
 				checkDirection(updatedGameMatrix, newPos2.row, newPos2.column, consecutiveCellCount,
 					moveList, direction1, direction2, false)
 			}
 			//handles if last cell drop is in 0 index column, immediately checks right
-			if (
-				newPos.column < 0) {
+			else if (
+				newPos.column < 0 ) {
+					consecutiveCellCount = 0
 					consecutiveCellCount++
+					// console.log('check3', direction2, consecutiveCellCount, newPos2)
 					checkDirection(updatedGameMatrix, newPos2.row, newPos2.column, consecutiveCellCount,
 						moveList, direction1, direction2, false)
 				}
