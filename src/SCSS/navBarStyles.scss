@@ -1,42 +1,42 @@
 /* navbar.scss */
 
-// Define variables or mixins if needed
-$navbar-background-color: #333;
-$navbar-text-color: #fff;
-$navbar-link-color: #fff;
-$navbar-link-hover-color: #ffcc00;
+// Navbar styles for the metallic grey scale theme
+$navbar-background: transparent; // Set the background to transparent
+$navbar-font-color: #F2F2F2; // Off-white color for the font
+$navbar-link-hover: #0099FF; // Link hover color for the navbar
 
 // Navbar styles
 .navbar {
-  background-color: $navbar-background-color;
+  background-color: $navbar-background;
   padding: 15px;
-
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  h1 {
+    font-size: 18px;
+    font-weight: 100;
+  }
   ul {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
-
     li {
       margin-right: 20px;
-
       &:last-child {
         margin-right: 0;
       }
-
-      a {
-        text-decoration: none;
-        color: $navbar-link-color;
-        display: block;
-
-        &:hover {
-          color: $navbar-link-hover-color;
-        }
       }
     }
   }
 
   a {
-    color: $navbar-text-color;
+    color: $navbar-font-color; // Set font color for all links
+    text-decoration: none;
+    display: block;
+    color: $navbar-font-color;
+
+    &:hover {
+      color: $navbar-link-hover;
   }
-}
+  }

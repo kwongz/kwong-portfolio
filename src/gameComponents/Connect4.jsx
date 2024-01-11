@@ -41,6 +41,7 @@ function Connect4() {
 	};
 
 	const handleScore = (winnerPlayer) => {
+		console.log(winnerPlayer)
 		const updatedScore = { ...score };
 		updatedScore[`player${winnerPlayer}`] =
 			updatedScore[`player${winnerPlayer}`] + 1;
@@ -55,7 +56,7 @@ function Connect4() {
 				updatedGameMatrix[i][column] = playerTurn;
 				setGameMatrix(updatedGameMatrix);
 				setPlayerTurn(playerTurn === 1 ? 2 : 1);
-				checkWinner(updatedGameMatrix, i, column); //i and column represent the position of the dropped coin
+				const winningPlayer = checkWinner(updatedGameMatrix, i, column); //i and column represent the position of the dropped coin
 				return;
 			}
 		}
@@ -69,6 +70,7 @@ function Connect4() {
 		// create a recursive function that checks the surrounding cells around the cell that was just updated with a player's move. If there are 4 consecutive cells filled with the same player, return them as the winner
 
 		//create a move list to add to the row and column values directionally move around the board
+
 		const moveList = {
 			up: { row: -1, column: 0}, 
 			down: { row: 1, column: 0},
@@ -83,6 +85,7 @@ function Connect4() {
 
 		let consecutiveCellCount = 0; // outside of loops so they retain their individual counts and dont reset on re-render
 		// let leftCell = moveLeft(droppedCoinRow, droppedCoinColumn);
+		let winningPlayer = null
 
 		//create a function that returns the final updated matrix position thats being checked, make it take arguments so it can move in any direction
 		const checkDirection = (
@@ -107,7 +110,10 @@ function Connect4() {
 			//Check logic
 			//if 3 consecutive coins have been counted, return the winner
 			if (consecutiveCellCount === 3) {
-				return console.log("winner", playerTurn, direction1, direction2);
+				console.log("winner", playerTurn, direction1, direction2);
+				setWinner(true)
+				handleScore(playerTurn)
+				setShowWinnerBanner(true)
 			}
 			//handles search in first direction
 			//catches any out of bound cells

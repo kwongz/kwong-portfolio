@@ -5,6 +5,33 @@ $brushedSteel: #B0C4DE;
 $MetallicRed: #B30000; 
 $MetallicBlue: #0066CC; 
 
+// Light Mode
+$light-background: #F5F5F5;
+$light-h1: #333333;
+$light-general-text: #666666;
+$light-paragraph-background: #FFFFFF;
+$light-link-hover: #4C4C4C;
+
+// Dark Mode
+$dark-background: #242424;
+$dark-h1: #FFFFFF;
+$dark-general-text: #B3B3B3;
+$dark-paragraph-background: #333333;
+$dark-link-hover: #808080;
+
+// Font styles
+$base-font-family: 'Roboto', sans-serif;
+$base-font-size: 16px; // Adjust as needed
+$base-line-height: 1.6; // Adjust as needed
+
+
+body {
+ background-color: $dark-background;
+ font-family: $base-font-family;
+ font-size: $base-font-size;
+ line-height: $base-line-height;
+}
+
 * {
     box-sizing: border-box;
   }
