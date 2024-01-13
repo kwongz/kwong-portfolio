@@ -10,6 +10,7 @@ $dark-background2: #cbd6dd; /* White for main headings */
 $dark-general-text: #B3B3B3; /* Light grey for general text */
 $dark-paragraph-background: #333333; /* Darker grey for paragraph background */
 $dark-link-hover: #808080; /* Mid-tone grey for link hover */
+$dark-hover-bg: rgba(33, 47, 59, 0.7);
 
 /* Additional Colors That Go Well with Muted Grey Background */
 $accent-color-1: #4E8DF5; /* Blue accent color */
@@ -35,6 +36,10 @@ h2 {
 
 li {
   list-style: none;
+}
+
+ul{
+  padding: 0;
 }
 
 
@@ -133,32 +138,10 @@ img {
 
 .divider-dark {
   background-color: #212f3b;
+  margin: 0;
 }
 
 .divider-light {
   background-color: #cbd6dd;
-}
-
-//Work Exp Section
-
-.work-experience-container {
-  margin: 0 auto;
-  width: 80%;
-  ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
-
-    .work-card {
-      width: calc(25% - 80px);
-      background: $dark-background2;
-      margin: 20px 0px;
-      border-radius: 10%;
-      .work-title {
-        border-bottom: 5px solid $gunmetal;
-        margin: 0px 20px;
-      }
-    }
-  }
+  margin: 0;
 }
