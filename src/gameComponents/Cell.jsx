@@ -23,7 +23,7 @@ function Cell({ status, handleTurn, gameMode, connect4Position }) {
 
 	return (
 		<div className={`cell ${mark}`} onClick={handleTurn}>
-			{filledCell} <p style={{ fontSize: '25px' }}>{connect4Position}</p> 
+			{filledCell} 
 		</div>
 	);
 }
