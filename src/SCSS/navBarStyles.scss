@@ -30,14 +30,3 @@ $navbar-link-hover: #0099FF; // Link hover color for the navbar
       }
     }
   }
-
-  a {
-    color: $navbar-font-color; // Set font color for all links
-    text-decoration: none;
-    display: block;
-    color: $navbar-font-color;
-
-    &:hover {
-      color: $navbar-link-hover;
-  }
-  }
