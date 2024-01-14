@@ -72,12 +72,12 @@ function Connect4() {
 		const moveList = {
 			up: { row: -1, column: 0 },
 			down: { row: 1, column: 0 },
-			left: { row: 0, column: -1 },
-			right: { row: 0, column: 1 },
-			upLeft: { row: -1, column: -1 },
-			downRight: { row: 1, column: 1 },
-			upRight: { row: -1, column: 1 },
-			downLeft: { row: 1, column: -1 },
+			left: { row: 0, column: -1, opposite: "right" },
+			right: { row: 0, column: 1, opposite: "left" },
+			upLeft: { row: -1, column: -1, opposite: "downRight" },
+			downRight: { row: 1, column: 1, opposite: "upLeft" },
+			upRight: { row: -1, column: 1, opposite: "downLeft" },
+			downLeft: { row: 1, column: -1, opposite: "upRight" },
 		};
 
 		let consecutiveCellCount = 0; // outside of loops so they retain their individual counts and dont reset on re-render
@@ -88,7 +88,8 @@ function Connect4() {
 			updatedGameMatrix,
 			droppedCoinRow,
 			droppedCoinColumn,
-			{ row, column }
+			consecutiveCellCount,
+			{ row, column, opposite }
 		) => {
 			// create a obj to hold the new cell that is being checked
 			const newPos = {
@@ -97,75 +98,49 @@ function Connect4() {
 			};
 			// if the consecutive count has reached 3 then announce winner
 			if (consecutiveCellCount === 3) {
+				console.log(consecutiveCellCount);
 				return console.log("winner");
 			}
 			// if the new position being checked is not out of bounds, and is the same value of the current player, increase the consecutive cell count and call that same function with the same direction.
 			else if (
-				newPos.row >= 0 ||
-				newPos.row <= updatedGameMatrix.length ||
-				newPos.column >= 0 ||
-				(newPos.column <= updatedGameMatrix[0].length &&
-					updatedGameMatrix[newPos.row][newPost.column] === playerTurn)
-			)
-				consecutiveCellCount++;
-			checkDirection(updatedGameMatrix, newPos.row, newPos.column, {
-				row,
-				column,
-			});
-		};
-
-		const checkDown = (row, column) => {
-			if (consecutiveCellCount === 3) {
-				return console.log("winner");
-			} else if (
-				row < updatedGameMatrix.length &&
-				updatedGameMatrix[row][column] === playerTurn
+				newPos.row >= 0 &&
+				newPos.row < updatedGameMatrix.length &&
+				newPos.column >= 0 &&
+				newPos.column <= updatedGameMatrix[0].length &&
+				updatedGameMatrix[newPos.row][newPos.column] === playerTurn
 			) {
 				consecutiveCellCount++;
-				checkDown(...Object.values(moveDown(row, column)));
-			}
-		}; //End of checkDown
-
-		const checkLeftRight = (row, column, direction) => {
-			//Checks if 3 consecutive cells have been found to be the same as the player's turn, the cell that the player dropped is assumed
-			if (consecutiveCellCount === 3) {
-				return console.log("winner");
-			}
-
-			if (
-				//check that left cell is not out of bounds, cell is same as player, check is moving LEFT
-				column - 1 >= 0 &&
-				updatedGameMatrix[row][column] === playerTurn &&
-				direction === "left"
-			) {
-				// increment count by 1, call function again to check in the LEFT of the last checked cell
-				consecutiveCellCount++;
-				checkLeftRight(...Object.values(moveLeft(row, column)), "left");
-			} else if (direction === "left") {
-				// since no win was found leftwards, keep count and go back to original cell position and check to the RIGHT
-				checkLeftRight(
-					...Object.values(moveRight(droppedCoinRow, droppedCoinColumn)),
-					"right"
+				console.log("checking");
+				checkDirection(
+					updatedGameMatrix,
+					newPos.row,
+					newPos.column,
+					consecutiveCellCount,
+					{
+						row,
+						column,
+						opposite,
+					}
+				);
+			} else if (opposite !== null) {
+				checkDirection(
+					updatedGameMatrix,
+					droppedCoinRow,
+					droppedCoinColumn,
+					consecutiveCellCount,
+					moveList[opposite]
 				);
 			}
-			//check that right cell is not out of bounds, cell is same as player, check is moving RIGHT
-			if (
-				column + 1 <= updatedGameMatrix[0].length &&
-				updatedGameMatrix[row][column] === playerTurn &&
-				direction === "right"
-			) {
-				// increment count by 1, call function again to check in the RIGHT of the last checked cell
-				consecutiveCellCount++;
-				checkLeftRight(...Object.values(moveRight(row, column)), "right");
-			}
-		}; //End of checkLeftRight
-
-		// initial calls to check directional functions
-		checkDown(...Object.values(moveDown(droppedCoinRow, droppedCoinColumn)));
-		checkLeftRight(
-			...Object.values(moveLeft(droppedCoinRow, droppedCoinColumn)),
-			"left"
-		);
+		};
+		for (const direction in moveList) {
+			checkDirection(
+				updatedGameMatrix,
+				droppedCoinRow,
+				droppedCoinColumn,
+				consecutiveCellCount,
+				moveList[direction]
+			);
+		}
 	}; // End of checkWinner
 
 	const handleRestart = () => {
