@@ -1,34 +1,19 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
-function AnimtatedTypeWriter() {
-  const [charIndex, setCharIndex] = useState(0);
-  const [wordIndex, setWordIndex] = useState(0)
-  const [displayedWord, setDisplayedWord] = useState('')
-  const animationRef = useRef();
 
-  const wordsDisplayed = ['Welcome']
+function AnimatedTypeWriter() {
+
+  const wordBank = ['Welcome', 'Kyle Wong - Web Developer']
 
   useEffect(() => {
-    const animateTyping = () => {
-      // Update the state or perform any animation logic here
-      
 
-      // Schedule the next frame
-      animationRef.current = requestAnimationFrame(animateTyping);
-    };
-
-    // Start the animation loop
-    animationRef.current = requestAnimationFrame(animateTyping);
-
-    // Clean up the animation loop when the component unmounts
-    return () => cancelAnimationFrame(animationRef.current);
-  }, []); // Empty dependency array ensures useEffect runs once on mount
-
+  }, [])
   return (
     <div>
-      {displayedWord} 
+      {/* JSX content */}
     </div>
   );
 }
 
-export default AnimtatedTypeWriter;
+export default AnimatedTypeWriter;
+

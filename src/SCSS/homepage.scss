@@ -1,0 +1,177 @@
+.homepage-container {
+  width: 80%;
+  margin: 0 auto;
+  padding-bottom: 200px;
+}
+
+.profile-container {
+  display: flex;
+  margin: 0px 50px;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 100px;
+}
+
+.img-container{
+  max-width: 400px;
+  width: 30%;
+  border: 1px solid $dark-background; /* Use the dark mode color */
+  overflow: hidden;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Adjust the shadow properties */
+}
+
+.profile-text {
+  color:$dark-general-text;
+  width: 50%;
+  font-size: 20px;
+}
+
+.section-title {
+  text-align: center;
+  padding-top: 25px;
+}
+
+.section-title-light {
+  color: $dark-general-text;
+  text-align: center;
+}
+
+.skills-bar {
+  background-color: $dark-background2;
+  margin: 0 auto;
+}
+
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding-top: 50px;
+  padding-bottom: 100px;
+  width: 80%;
+  margin: 0 auto;
+}
+
+
+.fa-brands {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  height: 100%;
+  width: 100%;
+}
+
+.icon-container {
+  list-style: none;
+  width: 150px;
+  height: 150px;
+  text-align: center;
+  margin: 10px 10px;
+  border: 1px solid black;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  position: relative;
+}
+
+.icon-title {
+position: relative;
+bottom: 35px;
+}
+
+.fa-img-title {
+  position: relative;
+  bottom: -1px;
+}
+
+.fa-img {
+  height: 50px;
+  width: 50px;
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 12px;
+}
+
+
+//Work Exp Section
+
+.work-experience-container {
+  margin: 0 auto;
+  width: 80%;
+  padding-bottom: 100px;
+  .card-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    row-gap: 50px;
+    padding: 20px;
+    justify-content: center;
+    .work-card {
+      background: $dark-background2;
+      padding: 0px 10px;
+      padding-bottom: 50px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin: 0 auto;
+      .work-title {
+        border-bottom: 5px solid $gunmetal;
+        margin: 0px 20px;
+      }
+    }
+  }
+}
+
+//Project Section
+
+.projects-section {
+  background-color: $dark-background2;
+  padding-bottom: 100px;
+
+  .project-grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    .project-container {
+      width: 80%;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin-bottom: 50px;
+      padding-bottom: 50px;
+      //
+      position: relative;
+      border: 2px solid #ddd; 
+      border-radius: 8px; 
+      box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); 
+      transition: background-color 0.4s ease;
+      &:hover{
+        background-color: $dark-hover-bg;
+      }
+      h3{
+        width: 100%;
+        text-align: center;
+      }
+  
+      .project-image-container,
+      .project-description-container {
+        width: 40%
+      }
+  
+      .project-image-container{
+       max-height:400px;
+       max-width: 600px;
+       img {
+        height: 100%;
+        object-fit:fill;
+       }
+      }
+
+      a {
+        display: inline;
+        margin-right: 10px;
+      }
+      
+    }
+  }
+}
+
+

@@ -5,24 +5,42 @@ $brushedSteel: #B0C4DE;
 $MetallicRed: #B30000; 
 $MetallicBlue: #0066CC; 
 
-// Light Mode
-$light-background: #F5F5F5;
-$light-h1: #333333;
-$light-general-text: #666666;
-$light-paragraph-background: #FFFFFF;
-$light-link-hover: #4C4C4C;
+$dark-background: #212f3b; /* Muted grey background */
+$dark-background2: #cbd6dd; /* White for main headings */
+$dark-general-text: #B3B3B3; /* Light grey for general text */
+$dark-paragraph-background: #333333; /* Darker grey for paragraph background */
+$dark-link-hover: #808080; /* Mid-tone grey for link hover */
+$dark-hover-bg: rgba(33, 47, 59, 0.7);
 
-// Dark Mode
-$dark-background: #242424;
-$dark-h1: #FFFFFF;
-$dark-general-text: #B3B3B3;
-$dark-paragraph-background: #333333;
-$dark-link-hover: #808080;
+/* Additional Colors That Go Well with Muted Grey Background */
+$accent-color-1: #4E8DF5; /* Blue accent color */
+$accent-color-2: #FF7F50; /* Coral/orange accent color */
+$accent-color-3: #9ACD32; /* Yellow-green accent color */
+$accent-color-4: #FFD700; /* Gold accent color */
+$accent-color-5: #DA70D6; /* Orchid/purple accent color */
+
 
 // Font styles
 $base-font-family: 'Roboto', sans-serif;
 $base-font-size: 16px; // Adjust as needed
 $base-line-height: 1.6; // Adjust as needed
+
+h1 {
+  font-size: 60px;
+  font-family: 'Lato', sans-serif;
+}
+h2 {
+  font-size: 40px;
+  font-family: 'Lato', sans-serif;
+}
+
+li {
+  list-style: none;
+}
+
+ul{
+  padding: 0;
+}
 
 
 body {
@@ -30,6 +48,7 @@ body {
  font-family: $base-font-family;
  font-size: $base-font-size;
  line-height: $base-line-height;
+ margin: 0;
 }
 
 * {
@@ -109,4 +128,20 @@ body {
   border-radius: 20px;
   padding: 10px;
   font-size: 20px;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.divider-dark {
+  background-color: #212f3b;
+  margin: 0;
+}
+
+.divider-light {
+  background-color: #cbd6dd;
+  margin: 0;
 }
