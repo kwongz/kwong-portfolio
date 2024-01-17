@@ -166,6 +166,11 @@
     font-size: 20px;
     color: black;
     margin: 0 auto;
+
+
+    .copy-highlight {
+      color: #005ca8; /* Steel blue text color */
+    }
   }// end of profile container
 
 
@@ -187,13 +192,12 @@
   }
 .projects-section {
   background-color: $background-color;
-  padding-bottom: 100px;
   .project-grid-container {
 
     .project-container{
       display: flex;
       margin: 0 auto;
-      width: 90%;
+      // width: 90%;
       max-width: 1200px;
       flex-wrap: wrap;
       justify-content: space-around;
@@ -247,7 +251,6 @@
 .work-experience-container {
   margin: 0 auto;
   width: 80%;
-  padding-bottom: 100px;
   .card-container {
     display: flex;
     flex-wrap: wrap;
@@ -268,6 +271,12 @@
       .work-title {
         border-bottom: 5px solid $gunmetal;
         margin: 0px 20px;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+      }
+      h3 {
+        padding-top: 5px;
+        margin-bottom: 5px;
       }
       .description {
         list-style: disc;
@@ -302,6 +311,7 @@
     max-width: 800px;
     .grid-container {
     grid-template-columns: 1fr;
+    row-gap: 25px;
   }
 }
 
@@ -345,3 +355,36 @@
 }
 
 
+@media (max-width: 750px) {
+  .homepage-container{
+    width: 95%;
+  }
+  .profile-text {
+    h1 {
+      font-size: 35px;
+    }
+    h2 {
+      font-size: 25px;
+    }
+    p{
+      font-size: 18px;
+    }
+  }
+
+  .work-experience-container {
+    width: 90%;
+  }
+}
+@media (max-width: 500px) {
+  .profile-text {
+    h1 {
+      font-size: 30px;
+    }
+    h2 {
+      font-size: 25px;
+    }
+    p{
+      font-size: 18px;
+    }
+  }
+}

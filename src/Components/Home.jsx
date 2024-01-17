@@ -73,15 +73,23 @@ function ComponentName() {
 						<ul className="links">
 							<li>
 								<i class="fa-brands fa-square-github"></i>
-								<a>Github</a>
+								<a href="https://github.com/kwongz" target="_blank">
+									Github
+								</a>
 							</li>
 							<li>
 								<i class="fa-brands fa-linkedin"></i>
-								<a>LinkedIn</a>
+								<a
+									href="https://www.linkedin.com/in/kyle-wong-410465a5/"
+									target="_blank">
+									LinkedIn
+								</a>
 							</li>
 							<li>
 								<i class="fa-brands fa-square-instagram"></i>
-								<a>Instagram</a>
+								<a href="https://www.instagram.com/kwongz/" target="_blank">
+									Instagram
+								</a>
 							</li>
 						</ul>
 						<span className="grid-divider"></span>
@@ -95,7 +103,7 @@ function ComponentName() {
 								</p>
 							</li>
 							<li>
-								<h4>University of Waterloo - 2014</h4>
+								<h4>University of Waterloo - 2015</h4>
 								<p>
 									BSc Kinesiology, my studies focused mainly on biomechanics,
 									injury mechanism. 3 terms co-op working in Waterloo Biomech
@@ -112,15 +120,23 @@ function ComponentName() {
 								<h2># Hello there!</h2>
 								<div>
 									<p>
-										👋 I'm Kyle, a passionate front-end developer with over 3
-										years of experience. My expertise lies in crafting
-										delightful user experiences using technologies like React,
-										JavaScript, HTML, and CSS.
+										👋 I'm Kyle, a passionate{" "}
+										<span className="copy-highlight">Front-End Developer</span>{" "}
+										with over{" "}
+										<span className="copy-highlight">
+											3 Years of Experience
+										</span>
+										. My expertise lies in crafting delightful user experiences
+										using technologies like{" "}
+										<span className="copy-highlight">
+											React, JavaScript, HTML
+										</span>
+										, and <span className="copy-highlight">CSS</span>.
 									</p>
 									<p>
 										🚀 What I Love: - Transforming ideas into interactive and
 										user-friendly designs. - Solving complex problems through
-										creative coding solutions. - And also golfing!
+										creative coding solutions. - And golfing!
 									</p>
 									<p>
 										💻 Explore my portfolio to see my work and get in touch for
