@@ -1,15 +1,19 @@
 //Header styling
 .homepage-container {
-  width: 80%;
+  width: 90%;
+  max-width: 1600px;
   margin: 0 auto;
   padding-bottom: 200px;
   .grid-container {
     display: grid;
-    grid-template-columns: 400px 2fr;
-    grid-template-columns: repeat(autofill);
+    grid-template-columns: 1fr 3fr;
     margin: 0 auto;
     column-gap: 50px;
+    //
+    //LEFT GRID
+    //
     .left-grid-container{
+      min-width: 350px;
       background-color: $background-color;
       border-radius: 20px;
       border: 1px solid black;
@@ -19,7 +23,6 @@
         inset 0 0 20px rgba(255, 255, 255, 0.5); 
     .profile-container {
       margin-top: 15px;
-      padding-bottom: 20px;
       width: 100%;
       margin: 0 auto;
       text-align: center;
@@ -34,60 +37,53 @@
         border-radius: 50%;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); 
       }
-    button {
-        background-color: $accent-color-1; 
-        color: #ffffff; 
-        padding: 10px 20px; 
-        font-size: 16px;
-        font-weight: bold;
+      button {
+        margin-top: 10px;
+        background-color: $button-background;
+        color: $button-text-color;
+        padding: 10px 20px;
         border: none;
         border-radius: 5px;
         cursor: pointer;
-        box-shadow:
-            0 2px 4px rgba(0, 0, 0, 0.1), 
-            0 0 0 2px $background-color; 
-        transition: transform 0.3s ease-in-out;
+        transition: background-color 0.3s ease;
         &:hover {
-          color: $accent-color-1;
-          background-color: $background-color;
-          animation: rotateAnimation 1.75s ease-in-out infinite alternate;
-        }
-        @keyframes rotateAnimation {
-          0% {
-            transform: rotate(0deg);
-          }
-          50% {
-              transform: rotate(3deg);
-          }
-          100% {
-              transform: rotate(-3deg);
-          }
+          background-color: $button-hover-background;
         }
       }
       .location {
         display: block;
-        margin-top: 25px;
+        margin: 10px 0px;
         font-size: 15px;
+      }
+
+      .email {
+        font-size: 20px;
+        i{
+          margin-right: 3px;
+        }
+        &:hover{
+          cursor: pointer;
+          border-bottom: 2px solid;
+        }
       }
     }//end of profile container
     }
   }
   
   .skills-bar {
-    h3 {
-      text-align: center;
-    }
     .skills-container{
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
+      margin: 0 auto;
+      width: 90%;
     }
     .icon-container {
       list-style: none;
-      width: 75px;
-      height: 75px;
+      width: 50px;
+      height: 50px;
+      margin: 15px 15px;
       text-align: center;
-      margin: 20px 10px;
       border: 1px solid black;
       box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
       position: relative;
@@ -95,30 +91,64 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 50px;
+        font-size: 25px;
         height: 100%;
         width: 100%;
       }
       .icon-title {
+      font-size: 14px;
       position: relative;
-      bottom: -2px;
+      bottom: -5px;
       }
       .fa-img-title {
         position: relative;
-        bottom: -24px;
+        bottom: -28px;
       }
       .fa-img {
-        height: 50px;
-        width: 50px;
+        height: 25px;
+        width: 25px;
         margin: 0 auto;
         position: relative;
         bottom: -10px;
       }
     }
   }// end of skills container
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    font-size: 18px;
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 15px;
+    a {
+      margin-left: 5px;
+      &:hover {
+        border-bottom: 2px solid;
+        cursor: pointer;
+      }
+    }
+  } //end of links section
+  .education {
+    width: 85%;
+    margin: 0 auto;
+    margin-top: 15px;
+    h4{
+      font-size: 20px;
+      color: $accent-color-4;
+      text-align: center;
+    }
+    p{
+      font-size: 16px;
+    }
+  }
 }
 
+//
+//RIGHT .grid-container
+//
 .right-grid-container {
+  min-width: 700px;
   background-color: $background-color;
   grid-row: span 2;
   border-radius: 20px;
@@ -127,84 +157,64 @@
     0 4px 8px rgba(0, 0, 0, 0.2), 
     0 0 0 2px $accent-color-1, 
     inset 0 0 20px rgba(255, 255, 255, 0.5); 
+    padding-top: 23px;
+  .grid-wrapper {
+    width: 90%;
+    margin: 0 auto;
+  }
   .profile-text {
     font-size: 20px;
     color: black;
-    padding: 0 20px;
     margin: 0 auto;
   }// end of profile container
-}
 
-.grid-divider {
-  display: block;
-  width: 90%;
-  border: 1px solid rgba(112, 112, 112, 0.5); 
-  border-radius: 5%;
-  margin: 0 auto;
-}
 
-//Work Exp Section
-
-.work-experience-container {
-  margin: 0 auto;
-  width: 80%;
-  padding-bottom: 100px;
-  .card-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    row-gap: 50px;
-    padding: 20px;
-    justify-content: center;
-    .work-card {
-      background: $background-color;
-      padding: 0px 10px;
-      padding-bottom: 50px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      margin: 0 auto;
-      .work-title {
-        border-bottom: 5px solid $gunmetal;
-        margin: 0px 20px;
-      }
+  //Project Section
+  
+  .filter-button {
+    display: inline-block;
+    margin-bottom: 30px;
+    margin-top: 10px;
+    margin-right: 30px;
+    padding-right: 3px;
+    padding-bottom: 5px;
+    transition: transform linear 0.2s;
+    &:hover {
+      cursor: pointer;
+      border-bottom: 2px solid rgba(0,0,0,0.4);
+      transform: scale(1.1);
     }
   }
-}
-
-//Project Section
-
 .projects-section {
   background-color: $background-color;
   padding-bottom: 100px;
-  h3 {
-    padding-left: 20px;
-  }
-
   .project-grid-container {
-    .project-container {
-      width: 80%;
-      margin: 0 auto;
+
+    .project-container{
       display: flex;
+      margin: 0 auto;
+      width: 90%;
+      max-width: 1200px;
       flex-wrap: wrap;
       justify-content: space-around;
       margin-bottom: 50px;
-      padding-bottom: 50px;
-      //
+      padding-bottom: 25px;
       position: relative;
       border: 2px solid #ddd; 
       border-radius: 8px; 
-      box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); 
-      transition: background-color 0.4s ease;
+      transition: box-shadow 0.3s, transform 0.3s;
       &:hover{
-        background-color: $dark-hover-bg;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        transform: scale(1.05);
       }
       h3{
+        margin: 10px 0px;
         width: 100%;
         text-align: center;
       }
       .project-image-container,
       .project-description-container {
-        width: 40%
+        width: 45%
       }
 
       .project-image-container{
@@ -221,6 +231,117 @@
       }
     }
   }
+}/// end of project section
+}
+
+.grid-divider {
+  display: block;
+  width: 90%;
+  border: 1px solid rgba(112, 112, 112, 0.5); 
+  border-radius: 5%;
+  margin: 15px auto;
+}
+
+//Work Exp Section
+
+.work-experience-container {
+  margin: 0 auto;
+  width: 80%;
+  padding-bottom: 100px;
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    .work-card {
+      width: 100%;
+      max-width: 1200px;
+      margin-bottom: 50px;
+      padding-bottom: 25px;
+      position: relative;
+      border: 2px solid #ddd; 
+      border-radius: 8px; 
+      transition: box-shadow 0.3s, transform 0.3s;
+      &:hover{
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        transform: scale(1.05);
+      }
+      .work-title {
+        border-bottom: 5px solid $gunmetal;
+        margin: 0px 20px;
+      }
+      .description {
+        list-style: disc;
+        padding-left: 40px;
+        li {
+          list-style: disc;
+        }
+      }
+    }
+  }
+}
+
+
+
+//Styling to hide and show projects and work tabs
+
+.hidden {
+  display: none;
+}
+
+.active-tab {
+  border-bottom: 2px solid black !important;
+  transform: scale(1.2) !important;
+  position: relative;
+  top: -1px;
+}
+
+// media query for tablet/mobile
+
+@media (max-width: 1200px) {
+  .homepage-container {
+    max-width: 800px;
+    .grid-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.left-grid-container {
+  min-width: 0px;
+}
+
+.right-grid-container {
+  min-width: 0px;
+
+  .grid-wrapper {
+
+  }
+  .profile-text {
+  }
+  .filter-button {
+    &:hover {
+    }
+  }
+.projects-section {
+  .project-grid-container {
+    .project-container{
+      &:hover{
+      }
+      h3{
+      }
+      .project-image-container,
+      .project-description-container {
+        width: 100%;
+      }
+      .project-image-container{
+       img {
+       }
+      }
+      a {
+      }
+    }
+  }
+}
+}
 }
 
 
