@@ -1,9 +1,9 @@
 // // Variables
-// $silver: #C0C0C0; 
-// $gunmetal: #2C3539; 
-// $brushedSteel: #B0C4DE; 
-// $MetallicRed: #B30000; 
-// $MetallicBlue: #0066CC; 
+// $silver: #C0C0C0;
+// $gunmetal: #2C3539;
+// $brushedSteel: #B0C4DE;
+// $MetallicRed: #B30000;
+// $MetallicBlue: #0066CC;
 
 // Gameboard styling with variables
 .tic-tac-toe-container {
@@ -27,9 +27,7 @@
   justify-content: center;
   align-items: center;
   font-size: 75px;
-  box-shadow:
-    0 0 5px rgba(255, 255, 255, 0.5),
-    0 0 15px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 15px rgba(0, 0, 0, 0.8);
   transition: 0.4s ease-in-out;
 }
 .cell:empty:hover {
@@ -39,19 +37,19 @@
 
 /* Assigning colors for X and O */
 .x-mark {
-  color: #B30000; 
-  text-shadow: 1px 1px 2px #8C001A; 
+  color: #b30000;
+  text-shadow: 1px 1px 2px #8c001a;
 }
 
 .o-mark {
-  color: #0066CC; 
-  text-shadow: 1px 1px 2px #00457A; 
+  color: #0066cc;
+  text-shadow: 1px 1px 2px #00457a;
 }
 
 .x-mark,
 .o-mark {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
-  background-color: #808080; 
+  background-color: #808080;
   box-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 15px rgba(0, 0, 0, 0.8);
   pointer-events: none;
   transform: scale(0.95);
@@ -79,12 +77,10 @@
   width: 200px;
   height: 200px;
   text-align: center;
-  background-color: #B0C4DE; 
+  background-color: #b0c4de;
   padding: 15px;
   border-radius: 8px;
-  box-shadow: 
-    0 0 5px rgba(255, 255, 255, 0.5), 
-    0 0 15px rgba(0, 0, 0, 0.8); 
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 15px rgba(0, 0, 0, 0.8);
 }
 
 /* Styling for restart button */
@@ -94,23 +90,21 @@
   margin-top: 30px;
   width: 100px;
   height: 40px;
-  background-color: #B0C4DE; 
+  background-color: #b0c4de;
   color: #333;
   border-radius: 5px;
   border: none;
   cursor: pointer;
-  box-shadow: 
-    0 0 5px rgba(255, 255, 255, 0.5), 
-    0 0 15px rgba(0, 0, 0, 0.8); 
-    &:hover{
-      background-color:$gunmetal;
-      color:$silver;
-    }
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 15px rgba(0, 0, 0, 0.8);
+  &:hover {
+    background-color: $gunmetal;
+    color: $silver;
+  }
 }
 
 // handle animation on win
 .animate-score {
-  background-image: linear-gradient(to right, #ff9999, #99ccff); 
+  background-image: linear-gradient(to right, #ff9999, #99ccff);
   background-size: 200% 100%;
   animation: scoreboardAndFlash 1s linear forwards infinite alternate;
 }
@@ -118,12 +112,23 @@
 @keyframes scoreboardAndFlash {
   0% {
     background-position: 0% 50%;
-    border-color: transparent; 
+    border-color: transparent;
   }
   100% {
     background-position: 100% 50%;
-    border-color: black; 
+    border-color: black;
   }
 }
 
-
+@media (max-width: 750px) {
+  .tic-tac-toe-container .gameboard {
+    width: 400px;
+    height: 400px;
+  }
+}
+@media (max-width: 450px) {
+  .tic-tac-toe-container .gameboard {
+    width: 350px;
+    height: 350px;
+  }
+}

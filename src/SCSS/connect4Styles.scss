@@ -1,31 +1,44 @@
 // // Variables
-// $silver: #C0C0C0; 
-// $gunmetal: #2C3539; 
-// $brushedSteel: #B0C4DE; 
-// $MetallicRed: #B30000; 
-// $MetallicBlue: #0066CC; 
-
+// $silver: #C0C0C0;
+// $gunmetal: #2C3539;
+// $brushedSteel: #B0C4DE;
+// $MetallicRed: #B30000;
+// $MetallicBlue: #0066CC;
 
 .connect4-container {
   text-align: center;
-  .gameboard{
-      grid-template-columns: repeat(7, 1fr);
-      grid-template-rows: repeat(6, 1fr);
-      width: 600px;
-      height: 600px;
-      .cell {
-        border-radius: 50%;
-        /* Other cell-specific styles */
-        margin: 10px 5px;
-      }
+  .gameboard {
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    width: 600px;
+    height: 600px;
+    .cell {
+      border-radius: 50%;
+      /* Other cell-specific styles */
+      margin: 10px 5px;
+    }
+  }
+
+  .red {
+    background-color: $MetallicRed;
+  }
+
+  .blue {
+    background-color: $MetallicBlue;
+  }
 }
 
-.red {
- background-color: $MetallicRed ;
-}
+//mobile styling
 
-.blue {
-  background-color: $MetallicBlue;
+@media (max-width: 750px) {
+  .connect4-container .gameboard {
+    width: 400px;
+    height: 400px;
+  }
 }
+@media (max-width: 450px) {
+  .connect4-container .gameboard {
+    width: 350px;
+    height: 350px;
+  }
 }
-  

@@ -2,8 +2,8 @@
 
 // Navbar styles for the metallic grey scale theme
 $navbar-background: transparent; // Set the background to transparent
-$navbar-font-color: #F2F2F2; // Off-white color for the font
-$navbar-link-hover: #0099FF; // Link hover color for the navbar
+$navbar-font-color: #f2f2f2; // Off-white color for the font
+$navbar-link-hover: #0099ff; // Link hover color for the navbar
 
 // Navbar styles
 .navbar {
@@ -15,12 +15,35 @@ $navbar-link-hover: #0099FF; // Link hover color for the navbar
   margin: 0px 50px;
   margin-bottom: 10px;
   height: 50px;
+  .hamburger-menu {
+    display: none;
+  }
   h1 {
     font-size: 18px;
     font-weight: 100;
     padding-bottom: 2px;
     &:hover {
-      border-bottom: 2px solid ;
+      border-bottom: 2px solid;
+    }
+  }
+  .contact {
+    display: inline-block;
+    text-decoration: none;
+    padding: 0px 5px;
+    border-radius: 20px;
+    border: 1px solid black;
+    background-color: #e9e9f2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 0 0 2px #0066cc,
+      inset 0 0 20px rgba(255, 255, 255, 0.5);
+    color: #fff; /* Font color */
+
+    /* Transition for a smooth hover effect */
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out,
+      border-color 0.3s ease-in-out;
+    &:hover {
+      background-color: #fff; /* Hover background color */
+      color: #3498db; /* Hover font color */
+      border: 1px solid rgba($color: #000000, $alpha: 0);
     }
   }
   ul {
@@ -35,8 +58,57 @@ $navbar-link-hover: #0099FF; // Link hover color for the navbar
         margin-right: 0;
       }
       &:hover {
-        border-bottom: 2px solid ;
-      }
+        border-bottom: 2px solid;
       }
     }
   }
+}
+
+@media screen and (max-width: 650px) {
+  .navbar {
+    margin: 0 20px;
+    padding: 10px;
+
+    .hamburger-menu {
+      display: block;
+      z-index: 101;
+      position: fixed;
+      right: 25px;
+      font-size: 25px;
+    }
+    position: relative;
+    .menu {
+      width: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      position: fixed;
+      right: -220px;
+      top: 0px;
+      padding-top: 50px;
+      padding-right: 56px;
+      padding-left: 15px;
+      padding-bottom: 15px;
+      background-color: $dark-paragraph-background;
+      z-index: 100;
+      border-radius: 5%;
+      transition: transform 0.8s ease-in-out;
+      .contact {
+        a {
+          color: $gunmetal;
+        }
+      }
+      li {
+        margin-bottom: 15px;
+        height: 20px;
+        a {
+          color: $brushedSteel;
+        }
+      }
+    }
+    .showMenu {
+      transform: translateX(-210px);
+    }
+  }
+}

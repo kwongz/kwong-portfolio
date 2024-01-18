@@ -1,8 +1,8 @@
-$silver: #C0C0C0;
-$gunmetal: #2C3539;
-$brushedSteel: #B0C4DE;
-$MetallicRed: #B30000;
-$MetallicBlue: #0066CC;
+$silver: #c0c0c0;
+$gunmetal: #2c3539;
+$brushedSteel: #b0c4de;
+$MetallicRed: #b30000;
+$MetallicBlue: #0066cc;
 
 $primary-color: $MetallicBlue;
 $secondary-color: $MetallicRed;
@@ -14,11 +14,11 @@ $body-background: #f1f1f1;
 $accent-color-1: $primary-color;
 
 $accent-color-2: $secondary-color;
-$accent-color-3: #9ACD32;
+$accent-color-3: #9acd32;
 $accent-color-4: #154d9b;
-$accent-color-5: #DA70D6;
+$accent-color-5: #da70d6;
 
-$base-font-family: #B3B3B3;
+$base-font-family: #b3b3b3;
 $base-font-size: 15px;
 $dark-paragraph-background: #333333;
 $dark-link-hover: #808080;
@@ -31,13 +31,13 @@ $button-box-shadow: $box-shadow;
 
 h1 {
   font-size: 60px;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   margin: 0;
 }
 
 h2 {
   font-size: 40px;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   margin: 0;
 }
 
@@ -107,7 +107,7 @@ body {
   align-items: center;
   margin-top: 50px;
   position: relative;
-  z-index: 100;
+  z-index: 50;
 
   > :first-child {
     color: $MetallicRed;
@@ -159,4 +159,44 @@ a {
   color: $gunmetal;
   text-decoration: none;
   transition: transform 0.3s ease-in-out;
+}
+
+.copy-highlight {
+  color: #005ca8; /* Steel blue text color */
+}
+
+//mobile styling
+
+@media (max-width: 750px) {
+  .scoreboard-container {
+    width: 80%;
+    div {
+      width: 150px;
+      font-size: 18px;
+      text-align: center;
+    }
+  }
+
+  .player-turn-banner,
+  .Zero-score-button {
+    font-size: 18px;
+    width: 150px;
+  }
+}
+
+@media (max-width: 450px) {
+  .scoreboard-container {
+    width: 85%;
+    div {
+      width: 150px;
+      font-size: 16px;
+      text-align: center;
+    }
+  }
+
+  .player-turn-banner,
+  .Zero-score-button {
+    font-size: 14px;
+    width: 125px;
+  }
 }
