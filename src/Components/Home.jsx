@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import profileImg from "../images/_DSC1569-Edit 2_compressed.jpg";
+import profileImg from "../images/kyle-wong-profile.jpg";
 import ReduxLogo from "../images/Redux.png";
 import FirebaseLogo from "../images/firebase.png";
 import connect4Pic from "../images/connect4.png";

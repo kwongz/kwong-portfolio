@@ -5,7 +5,7 @@ function NavBar() {
   const [mobileNavClosed, setMobileNavClosed] = useState(true);
 
   return (
-    <div className="navbar">
+    <div className="navbar" style={{ background: "red" }}>
       <h1>
         <Link to="/kwong-portfolio">@Code Kyle Wong</Link>
       </h1>
