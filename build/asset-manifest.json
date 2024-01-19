@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/kwongz-portfolio/static/css/main.7ffaf04c.css",
+    "main.js": "/kwongz-portfolio/static/js/main.dbbac251.js",
+    "static/js/787.1fd9f004.chunk.js": "/kwongz-portfolio/static/js/787.1fd9f004.chunk.js",
+    "static/media/_DSC1569-Edit 2_compressed.jpg": "/kwongz-portfolio/static/media/_DSC1569-Edit 2_compressed.2695d1d7face52681f7e.jpg",
+    "static/media/connect4.png": "/kwongz-portfolio/static/media/connect4.4307f892a2cc2d6da238.png",
+    "static/media/Redux.png": "/kwongz-portfolio/static/media/Redux.f63dffb275a162e57de2.png",
+    "static/media/tic-tac-toe.png": "/kwongz-portfolio/static/media/tic-tac-toe.9c507ba5547d6c5d1c35.png",
+    "index.html": "/kwongz-portfolio/index.html",
+    "main.7ffaf04c.css.map": "/kwongz-portfolio/static/css/main.7ffaf04c.css.map",
+    "main.dbbac251.js.map": "/kwongz-portfolio/static/js/main.dbbac251.js.map",
+    "787.1fd9f004.chunk.js.map": "/kwongz-portfolio/static/js/787.1fd9f004.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7ffaf04c.css",
+    "static/js/main.dbbac251.js"
+  ]
+}
