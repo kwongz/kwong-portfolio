@@ -7,7 +7,7 @@ function NavBar() {
 	return (
 		<div className="navbar">
 			<h1>
-				<Link to="/kwong-portfolio/">@Code Kyle Wong</Link>
+				<Link to="/kwongz-portfolio">@Code Kyle Wong</Link>
 			</h1>
 			<div
 				className="hamburger-menu"
