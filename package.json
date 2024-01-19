@@ -21,6 +21,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "homepage": "https://kwongz.github.io/kwongz-portfolio",
   "eslintConfig": {
     "extends": [
       "react-app",
