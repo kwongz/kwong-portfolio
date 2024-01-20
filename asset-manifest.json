@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/kwong-portfolio/static/css/main.7ffaf04c.css",
-    "main.js": "/kwong-portfolio/static/js/main.288ce25b.js",
+    "main.css": "/kwong-portfolio/static/css/main.fdb25042.css",
+    "main.js": "/kwong-portfolio/static/js/main.447c5c25.js",
     "static/js/787.1fd9f004.chunk.js": "/kwong-portfolio/static/js/787.1fd9f004.chunk.js",
     "static/media/kyle-wong-profile.jpg": "/kwong-portfolio/static/media/kyle-wong-profile.2695d1d7face52681f7e.jpg",
     "static/media/connect4.png": "/kwong-portfolio/static/media/connect4.4307f892a2cc2d6da238.png",
     "static/media/Redux.png": "/kwong-portfolio/static/media/Redux.f63dffb275a162e57de2.png",
     "static/media/tic-tac-toe.png": "/kwong-portfolio/static/media/tic-tac-toe.9c507ba5547d6c5d1c35.png",
     "index.html": "/kwong-portfolio/index.html",
-    "main.7ffaf04c.css.map": "/kwong-portfolio/static/css/main.7ffaf04c.css.map",
-    "main.288ce25b.js.map": "/kwong-portfolio/static/js/main.288ce25b.js.map",
+    "main.fdb25042.css.map": "/kwong-portfolio/static/css/main.fdb25042.css.map",
+    "main.447c5c25.js.map": "/kwong-portfolio/static/js/main.447c5c25.js.map",
     "787.1fd9f004.chunk.js.map": "/kwong-portfolio/static/js/787.1fd9f004.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7ffaf04c.css",
-    "static/js/main.288ce25b.js"
+    "static/css/main.fdb25042.css",
+    "static/js/main.447c5c25.js"
   ]
 }
