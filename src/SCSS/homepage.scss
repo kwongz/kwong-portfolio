@@ -164,7 +164,9 @@
     color: black;
     margin: 0 auto;
   } // end of profile container
-
+  .typewriter-container {
+    height: 130px;
+  }
   //Project Section
 
   .filter-button {
@@ -317,6 +319,9 @@
     .project-image-container,
     .project-description-container {
       width: 100%;
+    }
+    .typewriter-container {
+      height: 75px;
     }
   }
 }

@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import profileImg from "../images/kyle-wong-profile.jpg";
 import ReduxLogo from "../images/Redux.png";
 import FirebaseLogo from "../images/firebase.png";
-import connect4Pic from "../images/connect4.png";
-import ticTacToePic from "../images/tic-tac-toe.png";
+import Projects from "./Projects";
+import WorkXp from "./WorkXP";
+import AnimatedTypeWriter from "./AnimatedTypeWriter";
 
 function Home() {
   const [projectHidden, setProjectHidden] = useState(false);
+  const [secondPrinter, setSecondPrinter] = useState(false);
 
   return (
     <>
@@ -116,8 +118,24 @@ function Home() {
           <section className="right-grid-container">
             <div className="grid-wrapper">
               <div className="profile-text">
-                <h1>Front-End Developer</h1>
-                <h2># Hello there!</h2>
+                <div className="typewriter-container">
+                  <h1>
+                    <AnimatedTypeWriter
+                      text={"Front-End Developer"}
+                      printReady={true}
+                      setSecondPrinter={() => setSecondPrinter(true)}
+                      delay={50}
+                    />
+                  </h1>
+                  <h2>
+                    <AnimatedTypeWriter
+                      text={"# Hello There!"}
+                      printReady={secondPrinter}
+                      setSecondPrinter={() => setSecondPrinter(false)}
+                      delay={75}
+                    />
+                  </h2>
+                </div>
                 <div>
                   <p>
                     👋 I'm Kyle, a passionate{" "}
@@ -166,187 +184,10 @@ function Home() {
                 </span>
               </div>
 
-              <div
-                className={`projects-section ${projectHidden ? "hidden" : ""}`}
-              >
-                <div className="project-grid-container">
-                  <a href="/tic-tac-toe">
-                    <div className="project-container">
-                      <h3>Tic-Tac-Toe</h3>
-                      <div className="project-image-container">
-                        <img src={ticTacToePic} />
-                      </div>
-                      <div className="project-description-container">
-                        <h4>React Project</h4>
-                        <p>
-                          A{" "}
-                          <span className="copy-highlight">User Friendly</span>{" "}
-                          tic-tac-toe game, with multiple{" "}
-                          <span className="copy-highlight">
-                            Reusuable Components
-                          </span>{" "}
-                          for future projects.
-                        </p>
-                        <a
-                          href="https://github.com/kwongz/kwong-portfolio/tree/master/src/gameComponents"
-                          target="_blank"
-                        >
-                          Code
-                        </a>
-                        <a href="/tic-tac-toe">Link</a>
-                      </div>
-                    </div>
-                  </a>
-                  <a href="/connect4">
-                    <div className="project-container">
-                      <h3>Connect 4</h3>
-                      <div className="project-image-container">
-                        <img src={connect4Pic} />
-                      </div>
-                      <div className="project-description-container">
-                        <h4>React Project</h4>
-                        <p>
-                          <span className="copy-highlight">Repurposing</span>{" "}
-                          <span className="copy-highlight">components</span> and
-                          using a directional{" "}
-                          <span className="copy-highlight">
-                            recursive function
-                          </span>{" "}
-                          as my checkWin logic. Reuitlizing the recursion for
-                          upcoming project
-                        </p>
-
-                        <a
-                          href="https://github.com/kwongz/kwong-portfolio/tree/master/src/gameComponents"
-                          target="_blank"
-                        >
-                          Code
-                        </a>
-                        <a href="/connect4">Link</a>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </div>
+              <Projects projectHidden={projectHidden} />
             </div>
             {/*Work Experience Section*/}
-            <div
-              className={`work-experience-container ${
-                projectHidden ? "" : "hidden"
-              }`}
-            >
-              <ul className="card-container">
-                <li className="work-card">
-                  <a
-                    href="https://www.mirvish.com/shows/harry-potter-and-the-cursed-child"
-                    target="_blank"
-                  >
-                    <div className="work-title">
-                      <h3>Ensemble/Aeralist - Ed Mirvish Harry Potter</h3>
-                      <span>April 2022 - July 2023</span>
-                    </div>
-                    <ul className="description">
-                      <li>
-                        Cast Member in Harry potter and the cursed Child Toronto
-                      </li>
-                      <li>
-                        During off time, continued learning in Javascript and
-                        React
-                      </li>
-                      <li>
-                        Worked in diverse and large scale production of
-                        internationally recognized play
-                      </li>
-                    </ul>
-                  </a>
-                </li>
-                <li className="work-card">
-                  <a href="https://innocean.ca/" target="_blank">
-                    <div className="work-title">
-                      <h3>
-                        Jr. Front-end Developer -{" "}
-                        <a href="https://innocean.ca/">Innocean Worldwide</a>
-                      </h3>
-                      <span>Mar 2021 - Sept 2021</span>
-                    </div>
-                    <ul className="description">
-                      <li>
-                        Worked on new features, built new pages for Genesis
-                        Canadian Website
-                      </li>
-                      <li>
-                        Worked in cooperation with developer, designer, and
-                        international teams to deliver ad campaigns
-                      </li>
-                      <li>
-                        Took leadership role during restructuring of development
-                        team
-                      </li>
-                      <li>
-                        Efficiently managed multiple projects with tight
-                        deadlines, while collaborative with multiple teams
-                      </li>
-                    </ul>
-                  </a>
-                </li>
-                <li className="work-card">
-                  <a
-                    href="https://www.royalcaribbean.com/experience/cruise-shows-and-entertainment"
-                    target="_blank"
-                  >
-                    <div className="work-title">
-                      <h3>
-                        Dancer/Aeralist/Acrobat - Royal Caribbean Entertainment
-                      </h3>
-                      <span>April 2016 - March 2020</span>
-                    </div>
-                    <ul className="description">
-                      <li>
-                        Created and performed shows with a international cast
-                        around the world
-                      </li>
-                      <li>
-                        Rehearsed and created shows in collaboration with
-                        Dancers, Divers, Singers and Synchronize Swimmers in 1
-                        month
-                      </li>
-                    </ul>
-                  </a>
-                </li>
-                <li className="work-card">
-                  <a
-                    href="https://uwaterloo.ca/biomechanics-of-human-mobility-lab/"
-                    target="_blank"
-                  >
-                    <div className="work-title">
-                      <h3>
-                        Biomechanics Research Assistant - University of Waterloo
-                      </h3>
-                      <span>Sept 2013 - Aug 2015</span>
-                    </div>
-                    <ul className="description">
-                      <li>
-                        Assisted in the development and testing of prolonged
-                        standing and sitting studies
-                      </li>
-                      <li>
-                        Communicated to participants on lab protocols and
-                        research study methods
-                      </li>
-                      <li>
-                        Collected and analyzed motion capture, force plate and
-                        EMG data
-                      </li>
-                      <li>
-                        Contributed to weekly research meetings, updating
-                        research data and designing research study test
-                        protocols.
-                      </li>
-                    </ul>
-                  </a>
-                </li>
-              </ul>
-            </div>
+            <WorkXp projectHidden={projectHidden} />
           </section>
           {/* end of right-grid-container */}
         </div>
