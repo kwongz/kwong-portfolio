@@ -198,11 +198,6 @@
         position: relative;
         border: 2px solid #ddd;
         border-radius: 8px;
-        transition: box-shadow 0.3s, transform 0.3s;
-        &:hover {
-          box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-          transform: scale(1.05);
-        }
         h3 {
           margin: 10px 0px;
           width: 100%;
@@ -216,14 +211,29 @@
         .project-image-container {
           max-height: 400px;
           max-width: 600px;
+          transition: box-shadow 0.3s, transform 0.3s;
           img {
             height: 100%;
             object-fit: cover;
           }
+          &:hover {
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            transform: scale(1.1);
+          }
+        }
+        .project-link {
+          border: 1px solid $dark-paragraph-background;
+          background-color: $brushedSteel;
         }
         a {
           display: inline;
           margin-right: 10px;
+          border-radius: 5px;
+          padding: 0px 5px;
+          &:hover {
+            background-color: $dark-hover-bg;
+            color: $base-font-family;
+          }
         }
       }
     }
@@ -320,9 +330,6 @@
     .project-description-container {
       width: 100%;
     }
-    .typewriter-container {
-      height: 75px;
-    }
   }
 }
 
@@ -341,9 +348,17 @@
       font-size: 18px;
     }
   }
+  .typewriter-container {
+    height: 75px;
+  }
 
-  .right-grid-container .filter-button {
-    margin-left: 10px;
+  .right-grid-container{
+    .typewriter-container {
+      height: 75px;
+    } 
+    .filter-button {
+      margin-left: 10px;
+    }
   }
 
   .work-experience-container {

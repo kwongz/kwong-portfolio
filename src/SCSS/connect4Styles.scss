@@ -1,9 +1,4 @@
-// // Variables
-// $silver: #C0C0C0;
-// $gunmetal: #2C3539;
-// $brushedSteel: #B0C4DE;
-// $MetallicRed: #B30000;
-// $MetallicBlue: #0066CC;
+
 
 .connect4-container {
   text-align: center;
@@ -14,7 +9,6 @@
     height: 600px;
     .cell {
       border-radius: 50%;
-      /* Other cell-specific styles */
       margin: 10px 5px;
     }
   }

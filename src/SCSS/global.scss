@@ -156,13 +156,13 @@ img {
 }
 
 a {
-  color: $gunmetal;
+  color: inherit;
   text-decoration: none;
   transition: transform 0.3s ease-in-out;
 }
 
 .copy-highlight {
-  color: #005ca8; /* Steel blue text color */
+  color: #005ca8; 
 }
 
 //mobile styling
