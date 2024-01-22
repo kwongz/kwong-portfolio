@@ -183,7 +183,6 @@ function Home() {
                   <i class="fa-solid fa-code"></i> Work Experience
                 </span>
               </div>
-
               <Projects projectHidden={projectHidden} />
             </div>
             {/*Work Experience Section*/}

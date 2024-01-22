@@ -224,16 +224,16 @@
         .project-link {
           border: 1px solid $dark-paragraph-background;
           background-color: $brushedSteel;
-        }
-        a {
-          display: inline;
-          margin-right: 10px;
-          border-radius: 5px;
           padding: 0px 5px;
           &:hover {
             background-color: $dark-hover-bg;
             color: $base-font-family;
           }
+        }
+        a {
+          display: inline;
+          margin-right: 10px;
+          border-radius: 5px;
         }
       }
     }
@@ -352,10 +352,10 @@
     height: 75px;
   }
 
-  .right-grid-container{
+  .right-grid-container {
     .typewriter-container {
       height: 75px;
-    } 
+    }
     .filter-button {
       margin-left: 10px;
     }
