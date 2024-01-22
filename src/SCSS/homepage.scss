@@ -361,6 +361,17 @@
     }
   }
 
+  .right-grid-container
+    .projects-section
+    .project-grid-container
+    .project-container {
+    align-items: center;
+    .project-image-container {
+      max-width: 200px;
+      height: 200px;
+    }
+  }
+
   .work-experience-container {
     width: 90%;
   }
