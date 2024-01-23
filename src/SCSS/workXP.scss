@@ -1,0 +1,50 @@
+.work-experience-container {
+  margin: 0 auto;
+  width: 80%;
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    .work-card {
+      width: 100%;
+      max-width: 1200px;
+      margin-bottom: 50px;
+      padding-bottom: 25px;
+      position: relative;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      transition: box-shadow 0.3s, transform 0.3s;
+      &:hover {
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        transform: scale(1.05);
+      }
+      .work-title {
+        border-bottom: 5px solid $gunmetal;
+        margin: 0px 20px;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+      }
+      h3 {
+        padding-top: 5px;
+        margin-bottom: 5px;
+      }
+      .description {
+        width: 95%;
+        list-style: disc;
+        padding-left: 40px;
+        li {
+          list-style: disc;
+          margin-top: 5px;
+        }
+      }
+    }
+  }
+}
+
+// media query for tablet/mobile
+
+@media (max-width: 750px) {
+  .work-experience-container {
+    width: 90%;
+  }
+}
