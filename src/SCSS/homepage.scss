@@ -3,70 +3,54 @@
   width: 90%;
   max-width: 1600px;
   margin: 0 auto;
-  padding-bottom: 200px;
-  .grid-container {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    margin: 0 auto;
-    column-gap: 50px;
-    //
-    //LEFT GRID
-    //
-    .left-grid-container {
-      min-width: 350px;
-      background-color: $background-color;
-      border-radius: 20px;
-      border: 1px solid black;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 0 0 2px $accent-color-1,
-        inset 0 0 20px rgba(255, 255, 255, 0.5);
-      .profile-container {
-        margin-top: 15px;
-        width: 100%;
-        margin: 0 auto;
-        text-align: center;
-        .img-container {
-          max-width: 200px;
-          max-height: 200px;
-          margin: 0 auto;
-          margin-top: 25px;
-          width: 100%;
-          border: 2px solid $background-color;
-          overflow: hidden;
-          border-radius: 50%;
-          box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-        }
-        button {
-          margin-top: 10px;
-          background-color: $button-background;
-          color: $button-text-color;
-          padding: 10px 20px;
-          border: none;
-          border-radius: 5px;
-          cursor: pointer;
-          transition: background-color 0.3s ease;
-          &:hover {
-            background-color: $button-hover-background;
-          }
-        }
-        .location {
-          display: block;
-          margin: 10px 0px;
-          font-size: 15px;
-        }
+  padding-bottom: 50px;
+}
 
-        .email {
-          font-size: 20px;
-          i {
-            margin-right: 3px;
-          }
-          &:hover {
-            cursor: pointer;
-            border-bottom: 2px solid;
-          }
-        }
-      } //end of profile container
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  margin: 0 auto;
+  column-gap: 50px;
+}
+.left-grid-container {
+  min-width: 350px;
+  background-color: $background-color;
+  border-radius: 20px;
+  border: 1px solid black;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 0 0 2px $accent-color-1,
+    inset 0 0 20px rgba(255, 255, 255, 0.5);
+  .profile-container {
+    margin-top: 15px;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    .img-container {
+      max-width: 200px;
+      max-height: 200px;
+      margin: 0 auto;
+      margin-top: 25px;
+      width: 100%;
+      border: 2px solid $background-color;
+      overflow: hidden;
+      border-radius: 50%;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     }
-  }
+    .location {
+      display: block;
+      margin: 10px 0px;
+      font-size: 15px;
+    }
+    .email {
+      font-size: 20px;
+      i {
+        margin-right: 3px;
+      }
+      &:hover {
+        cursor: pointer;
+        border-bottom: 2px solid;
+      }
+    }
+  } //end of profile container
 
   .skills-bar {
     .skills-container {
@@ -292,6 +276,11 @@
   }
 }
 
+footer {
+  text-align: center;
+  padding-bottom: 10px;
+}
+
 //Styling to hide and show projects and work tabs
 
 .hidden {
@@ -375,6 +364,10 @@
   .work-experience-container {
     width: 90%;
   }
+
+  footer {
+    font-size: 12px;
+  }
 }
 @media (max-width: 500px) {
   .profile-text {
@@ -389,7 +382,19 @@
     }
   }
 
-  .right-grid-container .filter-button {
-    font-size: 14px;
+  .right-grid-container {
+    .projects-section {
+      .project-grid-container {
+        .project-container {
+          &:last-child {
+            margin-bottom: 20px;
+          }
+        }
+      }
+    }
+
+    .filter-button {
+      font-size: 14px;
+    }
   }
 }

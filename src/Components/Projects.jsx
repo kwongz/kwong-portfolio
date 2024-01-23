@@ -133,6 +133,7 @@ function Projects({ projectHidden }) {
           </div>
         </div>
       </div>
+      <footer>©Kyle Wong 2024</footer>
     </div>
   );
 }

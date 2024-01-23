@@ -60,7 +60,7 @@ ul {
 
 body {
   background-color: $body-background;
-  font-family: $base-font-family;
+  font-family: "Roboto", sans-serif;
   font-size: $base-font-size;
   margin: 0;
 }
@@ -162,7 +162,7 @@ a {
 }
 
 .copy-highlight {
-  color: #005ca8; 
+  color: #005ca8;
 }
 
 //mobile styling
