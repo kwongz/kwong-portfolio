@@ -13,8 +13,8 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/kwong-portfolio" element={<Home />} />
-          <Route path="/connect4" element={<Connect4 />} />
-          <Route path="/tic-tac-toe" element={<Tictactoe />} />
+          <Route path="/kwong-portfolio/connect4" element={<Connect4 />} />
+          <Route path="/kwong-portfolio/tic-tac-toe" element={<Tictactoe />} />
         </Routes>
       </div>
     </Router>

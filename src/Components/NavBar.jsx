@@ -22,13 +22,15 @@ function NavBar() {
       </div>
       <ul className={`menu ${mobileNavClosed ? "" : "showMenu"}`}>
         <li>
-          <Link to="https://www.genesis.com/ca/en/main.html">Genesis</Link>
+          <Link target="_blank" to="https://www.genesis.com/ca/en/main.html">
+            Genesis
+          </Link>
         </li>
         <li>
-          <Link to="/connect4">Connect 4</Link>
+          <Link to="/kwong-portfolio/connect4">Connect 4</Link>
         </li>
         <li>
-          <Link to="/tic-tac-toe">Tic-tac-toe</Link>
+          <Link to="/kwong-portfolio/tic-tac-toe">Tic-tac-toe</Link>
         </li>
         <li>
           <Link target="_blank" to="https://kwongz.github.io/KW-ECommerce-App/">
