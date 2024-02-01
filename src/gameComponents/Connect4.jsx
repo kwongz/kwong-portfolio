@@ -105,7 +105,7 @@ function Connect4() {
       //Check logic
       //if 3 consecutive coins have been counted, return the winner
       if (consecutiveCellCount === 3) {
-        setWinner(true);
+        setWinner(playerTurn);
         handleScore(playerTurn);
         setShowWinnerBanner(true);
       }
