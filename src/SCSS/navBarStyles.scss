@@ -1,9 +1,9 @@
 /* navbar.scss */
 
 // Navbar styles for the metallic grey scale theme
-$navbar-background: transparent; 
-$navbar-font-color: #f2f2f2; 
-$navbar-link-hover: #0099ff; 
+$navbar-background: transparent;
+$navbar-font-color: #f2f2f2;
+$navbar-link-hover: #0099ff;
 
 // Navbar styles
 .navbar {
@@ -31,23 +31,32 @@ $navbar-link-hover: #0099ff;
     text-decoration: none;
     padding: 0px 5px;
     border-radius: 5px;
-    border: 1px solid $dark-paragraph-background;
-    background-color: $brushedSteel;
-    &:hover {
-      background-color: $dark-hover-bg;
-      color: $button-text-color;
-      border-bottom: 1px solid black
+    &:hover,
+    &:focus {
+      background-color: $gunmetal;
+      border: none;
+      color: $accent-color-3;
     }
-    
+    a {
+      color: inherit;
+      &:hover,
+      &:focus {
+        background-color: $gunmetal;
+        border: none;
+        color: $accent-color-3;
+      }
+    }
   }
   ul {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
+    align-items: center;
     padding-bottom: 2px;
     li {
       margin-right: 20px;
+      border-bottom: 2px solid $body-background;
       &:last-child {
         margin-right: 0;
       }
@@ -63,28 +72,27 @@ $navbar-link-hover: #0099ff;
     margin: 0 20px;
     padding: 10px;
     ul {
-
-      li{
+      li {
         margin-bottom: 15px;
         height: 20px;
         &:hover {
           border-bottom: none;
         }
         &::after {
-          content: ''; 
+          content: "";
           background-color: $silver;
           height: 5px;
           width: 5px;
           position: relative;
           left: 20px;
-          border-radius: 50%; 
+          border-radius: 50%;
           display: none;
-          transition: transform 0.3s; 
+          transition: transform 0.3s;
         }
-        
+
         &:hover::after {
           display: inline-block;
-          transform: scale(1.5); 
+          transform: scale(1.5);
         }
         a {
           color: $brushedSteel;
@@ -95,14 +103,13 @@ $navbar-link-hover: #0099ff;
           border-bottom: none;
         }
         background-color: $brushedSteel;
-        a{
+        a {
           color: $gunmetal;
           &:hover {
             color: $button-text-color;
           }
         }
       }
-      
     }
     .hamburger-menu {
       display: block;
