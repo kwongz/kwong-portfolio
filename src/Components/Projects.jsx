@@ -3,6 +3,7 @@ import connect4Pic from "../images/connect4.png";
 import ticTacToePic from "../images/tic-tac-toe.png";
 import kwEcommerce from "../images/kw-ecommerce.png";
 import genesis from "../images/genesis.png";
+import { Link } from "react-router-dom";
 
 function Projects({ projectHidden }) {
   return (
@@ -41,7 +42,10 @@ function Projects({ projectHidden }) {
       <div className="project-container">
         <h3>Connect 4</h3>
         <div className="project-image-container">
-          <a href="/connect4" target="_blank">
+          <a
+            href="https://kwongz.github.io/kwong-portfolio/#/connect4"
+            target="_blank"
+          >
             <img src={connect4Pic} />
           </a>
         </div>
@@ -57,12 +61,16 @@ function Projects({ projectHidden }) {
 
           <a
             className="project-link"
-            href="https://github.com/kwongz/kwong-portfolio/tree/master/src/gameComponents"
+            href="https://github.com/kwongz/kwong-portfolio/tree/main/src/gameComponents"
             target="_blank"
           >
             Code
           </a>
-          <a className="project-link" href="/connect4" target="_blank">
+          <a
+            className="project-link"
+            href="https://kwongz.github.io/kwong-portfolio/#/connect4"
+            target="_blank"
+          >
             Link
           </a>
         </div>
@@ -70,7 +78,10 @@ function Projects({ projectHidden }) {
       <div className="project-container">
         <h3>Tic-Tac-Toe</h3>
         <div className="project-image-container">
-          <a href="/tic-tac-toe" target="_blank">
+          <a
+            href="https://kwongz.github.io/kwong-portfolio/#/tic-tac-toe"
+            target="_blank"
+          >
             <img src={ticTacToePic} />
           </a>
         </div>
@@ -89,7 +100,11 @@ function Projects({ projectHidden }) {
           >
             Code
           </a>
-          <a className="project-link" href="/tic-tac-toe" target="_blank">
+          <a
+            className="project-link"
+            href="https://kwongz.github.io/kwong-portfolio/#/tic-tac-toe"
+            target="_blank"
+          >
             Link
           </a>
         </div>

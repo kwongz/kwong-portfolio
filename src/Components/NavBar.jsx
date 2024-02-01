@@ -9,7 +9,7 @@ function NavBar() {
   return (
     <div className="navbar">
       <h1>
-        <Link to="/kwong-portfolio">@Code Kyle Wong</Link>
+        <Link to="/">@Code Kyle Wong</Link>
       </h1>
       <div
         className="hamburger-menu"
@@ -27,10 +27,10 @@ function NavBar() {
           </Link>
         </li>
         <li>
-          <Link to="/kwong-portfolio/connect4">Connect 4</Link>
+          <Link to="/connect4">Connect 4</Link>
         </li>
         <li>
-          <Link to="/kwong-portfolio/tic-tac-toe">Tic-tac-toe</Link>
+          <Link to="/tic-tac-toe">Tic-tac-toe</Link>
         </li>
         <li>
           <Link target="_blank" to="https://kwongz.github.io/KW-ECommerce-App/">
