@@ -46,6 +46,12 @@ $navbar-link-hover: #0099ff;
     }
     a {
       color: inherit;
+      &:hover,
+      &:focus {
+        background-color: $gunmetal;
+        border: none;
+        color: $accent-color-3;
+      }
     }
   }
   ul {
@@ -57,6 +63,7 @@ $navbar-link-hover: #0099ff;
     padding-bottom: 2px;
     li {
       margin-right: 20px;
+      border-bottom: 2px solid $body-background;
       &:last-child {
         margin-right: 0;
       }
