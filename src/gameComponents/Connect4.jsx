@@ -51,7 +51,7 @@ function Connect4() {
         updatedGameMatrix[i][column] = playerTurn;
         setGameMatrix(updatedGameMatrix);
         setPlayerTurn(playerTurn === 1 ? 2 : 1);
-        const winningPlayer = checkWinner(updatedGameMatrix, i, column); //i and column represent the position of the dropped coin
+        checkWinner(updatedGameMatrix, i, column); //i and column represent the position of the dropped coin
         return;
       }
     }
@@ -80,7 +80,6 @@ function Connect4() {
 
     let consecutiveCellCount = 0; // outside of loops so they retain their individual counts and dont reset on re-render
     // let leftCell = moveLeft(droppedCoinRow, droppedCoinColumn);
-    let winningPlayer = null;
 
     //create a function that returns the final updated matrix position thats being checked, make it take arguments so it can move in any direction
     const checkDirection = (
@@ -105,7 +104,7 @@ function Connect4() {
       //Check logic
       //if 3 consecutive coins have been counted, return the winner
       if (consecutiveCellCount === 3) {
-        setWinner(true);
+        setWinner(playerTurn);
         handleScore(playerTurn);
         setShowWinnerBanner(true);
       }
