@@ -8,14 +8,16 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <NavBar />
-      <Routes>
-        <Route path="/kwong-portfolio" exact component={Home} />
-        <Route path="/kwong-portfolio/connect4" component={Connect4} />
-        <Route path="/kwong-portfolio/tic-tac-toe" component={Tictactoe} />
-      </Routes>
-    </div>
+    <Router>
+      <div className="App">
+        <NavBar />
+        <Routes>
+          <Route path="/kwong-portfolio" exact component={Home} />
+          <Route path="/kwong-portfolio/connect4" component={Connect4} />
+          <Route path="/kwong-portfolio/tic-tac-toe" component={Tictactoe} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
