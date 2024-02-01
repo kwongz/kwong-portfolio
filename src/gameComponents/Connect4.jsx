@@ -41,7 +41,6 @@ function Connect4() {
   };
 
   const handleScore = (winnerPlayer) => {
-    console.log(winnerPlayer);
     const updatedScore = { ...score };
     updatedScore[`player${winnerPlayer}`] =
       updatedScore[`player${winnerPlayer}`] + 1;
@@ -110,8 +109,7 @@ function Connect4() {
       //Check logic
       //if 3 consecutive coins have been counted, return the winner
       if (consecutiveCellCount === 3) {
-        console.log("winner", playerTurn, direction1, direction2);
-        setWinner(true);
+        setWinner(playerTurn);
         handleScore(playerTurn);
         setShowWinnerBanner(true);
       }
@@ -130,7 +128,6 @@ function Connect4() {
         //	if true, increase count, and keep searching in firstDirection, while adding the new cell coordinates to be searched
         if (updatedGameMatrix[newPos.row][newPos.column] === playerTurn) {
           consecutiveCellCount++;
-          // console.log('check1', direction1, consecutiveCellCount)
           checkDirection(
             updatedGameMatrix,
             newPos.row,
@@ -146,7 +143,6 @@ function Connect4() {
           //starts checking cells from the last cell that was checked and moves in the opposite direction while incrementing count
         } else if (firstDirection) {
           consecutiveCellCount = 0;
-          // console.log('switch', direction2, consecutiveCellCount, newPos)
           checkDirection(
             updatedGameMatrix,
             droppedCoinRow,
@@ -175,7 +171,6 @@ function Connect4() {
         !firstDirection
       ) {
         consecutiveCellCount++;
-        // console.log('check2', direction2, consecutiveCellCount, newPos2)
         checkDirection(
           updatedGameMatrix,
           newPos2.row,
@@ -191,7 +186,6 @@ function Connect4() {
       else if (newPos.column < 0) {
         consecutiveCellCount = 0;
         consecutiveCellCount++;
-        // console.log('check3', direction2, consecutiveCellCount, newPos2)
         checkDirection(
           updatedGameMatrix,
           newPos2.row,
@@ -248,7 +242,6 @@ function Connect4() {
   }; // End of checkWinner
 
   const handleRestart = () => {
-    console.log("click");
     setGameMatrix(
       Array.from({ length: rows }, () =>
         Array.from({ length: columns }, () => null)
