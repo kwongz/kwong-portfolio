@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import ResumeButton from "./ResumeButton";
-import resume from "../images/KyleWongResume2024.pdf";
 
 function NavBar() {
   const [mobileNavClosed, setMobileNavClosed] = useState(true);
@@ -22,26 +20,18 @@ function NavBar() {
       </div>
       <ul className={`menu ${mobileNavClosed ? "" : "showMenu"}`}>
         <li>
-          <Link target="_blank" to="https://www.genesis.com/ca/en/main.html">
-            Genesis
-          </Link>
+          <Link to="/tic-tac-toe">Tic-tac-toe</Link>
         </li>
         <li>
-          <Link to="/kwong-portfolio/connect4">Connect 4</Link>
-        </li>
-        <li>
-          <Link to="/kwong-portfolio/tic-tac-toe">Tic-tac-toe</Link>
+          <Link to="/connect4">Connect 4</Link>
         </li>
         <li>
           <Link target="_blank" to="https://kwongz.github.io/KW-ECommerce-App/">
             Makeup store
           </Link>
         </li>
-        <li className="navBarButton">
+        <li className="contact">
           <a href="mailto:Kyle.wong917@gmail.com">Contact</a>
-        </li>
-        <li className="navBarButton">
-          <ResumeButton fileUrl={resume} fileName={"Kyle Wong Resume"} />
         </li>
       </ul>
     </div>

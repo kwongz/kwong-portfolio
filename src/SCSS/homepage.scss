@@ -251,43 +251,19 @@ footer {
   }
 }
 @media (max-width: 500px) {
-  .right-grid-container {
-    .typewriter-container {
-      height: 60px;
-    }
-  }
   .profile-text {
     h1 {
-      font-size: 28px;
+      font-size: 30px;
     }
     h2 {
       font-size: 25px;
     }
     p {
-      font-size: 16px;
+      font-size: 18px;
     }
   }
 
   .filter-button {
     font-size: 14px;
-  }
-}
-
-@media (max-width: 325px) {
-  .right-grid-container {
-    .typewriter-container {
-      height: 45px;
-    }
-  }
-  .profile-text {
-    h1 {
-      font-size: 22px;
-    }
-    h2 {
-      font-size: 20px;
-    }
-    p {
-      font-size: 14px;
-    }
   }
 }

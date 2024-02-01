@@ -4,13 +4,16 @@ $brushedSteel: #b0c4de;
 $MetallicRed: #b30000;
 $MetallicBlue: #0066cc;
 
+$primary-color: $MetallicBlue;
+$secondary-color: $MetallicRed;
+
 $box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
 $background-color: #e9e9f2;
 $body-background: #f1f1f1;
-$accent-color-1: $MetallicBlue;
+$accent-color-1: $primary-color;
 
-$accent-color-2: $MetallicRed;
+$accent-color-2: $secondary-color;
 $accent-color-3: #9acd32;
 $accent-color-4: #154d9b;
 $accent-color-5: #da70d6;
@@ -88,8 +91,7 @@ body {
   margin-left: 10px;
   border: 3px solid black;
 
-  &:hover,
-  &:focus {
+  &:hover {
     background-color: $silver;
     color: $gunmetal;
     cursor: pointer;

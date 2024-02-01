@@ -1,3 +1,5 @@
+
+
 // Gameboard styling with variables
 .tic-tac-toe-container {
   text-align: center;
@@ -23,8 +25,7 @@
   box-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 15px rgba(0, 0, 0, 0.8);
   transition: 0.4s ease-in-out;
 }
-.cell:empty:hover,
-.cell:empty:focus {
+.cell:empty:hover {
   transition: transform 0.4s ease-in-out;
   transform: scale(1.1);
 }
@@ -90,8 +91,7 @@
   border: none;
   cursor: pointer;
   box-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 15px rgba(0, 0, 0, 0.8);
-  &:hover,
-  &:focus {
+  &:hover {
     background-color: $gunmetal;
     color: $silver;
   }
