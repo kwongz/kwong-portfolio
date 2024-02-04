@@ -20,15 +20,14 @@ function Connect4() {
 
   const renderBoard = () => {
     const board = [];
-    for (let i = 0; i < gameMatrix.length; i++) {
-      for (let j = 0; j < gameMatrix[i].length; j++) {
+    for (let row = 0; row < gameMatrix.length; row++) {
+      for (let column = 0; column < gameMatrix[row].length; column++) {
         board.push(
           <Cell
-            key={`${i}-${j}`}
-            status={gameMatrix[i][j]}
-            handleTurn={() => handleTurn(i, j)}
+            key={`${row}-${column}`}
+            status={gameMatrix[row][column]}
+            handleTurn={() => handleTurn(column)}
             gameMode={"connect4"}
-            connect4Position={`${i}-${j}`}
           />
         );
       }
@@ -36,22 +35,21 @@ function Connect4() {
     return board;
   };
 
-  const handleScore = (winnerPlayer) => {
+  const handleScore = (winningPlayer) => {
     const updatedScore = { ...score };
-    updatedScore[`player${winnerPlayer}`] =
-      updatedScore[`player${winnerPlayer}`] + 1;
+    updatedScore[`player${winningPlayer}`] += 1;
     setScore(updatedScore);
   };
 
-  const handleTurn = (row, column) => {
+  const handleTurn = (column) => {
     // loop through the rows in the selected column to check if they are empty, if it is empty fill it with the player, change plaeyrs and exit loop
-    for (let i = 5; i >= 0; i--) {
-      if (gameMatrix[i][column] === null) {
+    for (let row = 5; row >= 0; row--) {
+      if (gameMatrix[row][column] === null) {
         const updatedGameMatrix = [...gameMatrix];
-        updatedGameMatrix[i][column] = playerTurn;
+        updatedGameMatrix[row][column] = playerTurn;
         setGameMatrix(updatedGameMatrix);
         setPlayerTurn(playerTurn === 1 ? 2 : 1);
-        const winningPlayer = checkWinner(updatedGameMatrix, i, column); //i and column represent the position of the dropped coin
+        checkWinner(updatedGameMatrix, row, column); //row and column represent the position of the dropped coin
         return;
       }
     }
@@ -59,13 +57,10 @@ function Connect4() {
 
   const checkWinner = (
     updatedGameMatrix,
-    droppedCoinRow,
-    droppedCoinColumn
+    currentCoinRow,
+    currentCoinColumn
   ) => {
-    // create a recursive function that checks the surrounding cells around the cell that was just updated with a player's move. If there are 4 consecutive cells filled with the same player, return them as the winner
-
-    //create a move list to add to the row and column values directionally move around the board
-
+    //create a move list to add to the currentCoinRow and currentCoinColumn to check directionally around the dropped coin position
     const moveList = {
       up: { row: -1, column: 0 },
       down: { row: 1, column: 0 },
@@ -78,29 +73,25 @@ function Connect4() {
       none: {},
     };
 
-    let consecutiveCellCount = 0; // outside of loops so they retain their individual counts and dont reset on re-render
-    // let leftCell = moveLeft(droppedCoinRow, droppedCoinColumn);
-    let winningPlayer = null;
+    let consecutiveCellCount = 0;
 
-    //create a function that returns the final updated matrix position thats being checked, make it take arguments so it can move in any direction
+    // create a recursive function that checks the surrounding cells around the cell that was just updated with a player's move. If there are 4 consecutive cells filled with the same player, return them as the winner
     const checkDirection = (
-      updatedGameMatrix,
-      droppedCoinRow,
-      droppedCoinColumn,
+      currentCoinRow,
+      currentCoinColumn,
       consecutiveCellCount,
-      moveList,
       direction1,
       direction2,
-      firstDirection
+      checkingFirstDirection
     ) => {
       //
       const newPos = {
-        row: droppedCoinRow + moveList[direction1].row,
-        column: droppedCoinColumn + moveList[direction1].column,
+        row: currentCoinRow + moveList[direction1].row,
+        column: currentCoinColumn + moveList[direction1].column,
       };
       const newPos2 = {
-        row: droppedCoinRow + moveList[direction2].row,
-        column: droppedCoinColumn + moveList[direction2].column,
+        row: currentCoinRow + moveList[direction2].row,
+        column: currentCoinColumn + moveList[direction2].column,
       };
       //Check logic
       //if 3 consecutive coins have been counted, return the winner
@@ -117,7 +108,7 @@ function Connect4() {
         newPos.row < updatedGameMatrix.length &&
         newPos.column >= 0 &&
         newPos.column <= updatedGameMatrix[0].length &&
-        firstDirection
+        checkingFirstDirection
       ) {
         // second if check
         //checks if cell in check is same as player turn
@@ -125,11 +116,9 @@ function Connect4() {
         if (updatedGameMatrix[newPos.row][newPos.column] === playerTurn) {
           consecutiveCellCount++;
           checkDirection(
-            updatedGameMatrix,
             newPos.row,
             newPos.column,
             consecutiveCellCount,
-            moveList,
             direction1,
             direction2,
             true
@@ -137,14 +126,12 @@ function Connect4() {
           //handles if cell check is not the same as player
           //checks to see if we are still in first direction, then set count to 0
           //starts checking cells from the last cell that was checked and moves in the opposite direction while incrementing count
-        } else if (firstDirection) {
+        } else if (checkingFirstDirection) {
           consecutiveCellCount = 0;
           checkDirection(
-            updatedGameMatrix,
-            droppedCoinRow,
-            droppedCoinColumn,
+            currentCoinRow,
+            currentCoinColumn,
             consecutiveCellCount,
-            moveList,
             direction1,
             direction2,
             false
@@ -164,15 +151,13 @@ function Connect4() {
         newPos2.column >= 0 &&
         newPos2.column <= updatedGameMatrix[0].length &&
         updatedGameMatrix[newPos2.row][newPos2.column] === playerTurn &&
-        !firstDirection
+        !checkingFirstDirection
       ) {
         consecutiveCellCount++;
         checkDirection(
-          updatedGameMatrix,
           newPos2.row,
           newPos2.column,
           consecutiveCellCount,
-          moveList,
           direction1,
           direction2,
           false
@@ -183,11 +168,9 @@ function Connect4() {
         consecutiveCellCount = 0;
         consecutiveCellCount++;
         checkDirection(
-          updatedGameMatrix,
           newPos2.row,
           newPos2.column,
           consecutiveCellCount,
-          moveList,
           direction1,
           direction2,
           false
@@ -196,41 +179,33 @@ function Connect4() {
     }; // end of check direction
     //
     checkDirection(
-      updatedGameMatrix,
-      droppedCoinRow,
-      droppedCoinColumn,
+      currentCoinRow,
+      currentCoinColumn,
       consecutiveCellCount,
-      moveList,
       "down",
       "none",
       true
     );
     checkDirection(
-      updatedGameMatrix,
-      droppedCoinRow,
-      droppedCoinColumn,
+      currentCoinRow,
+      currentCoinColumn,
       consecutiveCellCount,
-      moveList,
       "left",
       "right",
       true
     );
     checkDirection(
-      updatedGameMatrix,
-      droppedCoinRow,
-      droppedCoinColumn,
+      currentCoinRow,
+      currentCoinColumn,
       consecutiveCellCount,
-      moveList,
       "upLeft",
       "downRight",
       true
     );
     checkDirection(
-      updatedGameMatrix,
-      droppedCoinRow,
-      droppedCoinColumn,
+      currentCoinRow,
+      currentCoinColumn,
       consecutiveCellCount,
-      moveList,
       "upRight",
       "downLeft",
       true
