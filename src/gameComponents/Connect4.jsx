@@ -7,16 +7,15 @@ import ScoreBoard from "./ScoreBoard";
 function Connect4() {
   const rows = 6;
   const columns = 7;
+  const STARTING_GAME_MATRIX = Array.from({ length: rows }, () =>
+    Array.from({ length: columns }, () => null)
+  );
 
   const [playerTurn, setPlayerTurn] = useState(1);
   const [winner, setWinner] = useState(false);
   const [showWinnerBanner, setShowWinnerBanner] = useState(false);
   const [score, setScore] = useState({ player1: 0, player2: 0 });
-  const [gameMatrix, setGameMatrix] = useState(
-    Array.from({ length: rows }, () =>
-      Array.from({ length: columns }, () => null)
-    )
-  );
+  const [gameMatrix, setGameMatrix] = useState(STARTING_GAME_MATRIX);
 
   const renderBoard = () => {
     const board = [];
@@ -42,7 +41,7 @@ function Connect4() {
   };
 
   const handleTurn = (column) => {
-    // loop through the rows in the selected column to check if they are empty, if it is empty fill it with the player, change plaeyrs and exit loop
+    // loop through the rows in the selected column to check if they are empty, if it is empty fill it with the player, change players and exit loop
     for (let row = 5; row >= 0; row--) {
       if (gameMatrix[row][column] === null) {
         const updatedGameMatrix = [...gameMatrix];
@@ -53,6 +52,19 @@ function Connect4() {
         return;
       }
     }
+  };
+
+  const handleRestart = () => {
+    setGameMatrix(STARTING_GAME_MATRIX);
+    setPlayerTurn(1);
+    setShowWinnerBanner(false);
+    setWinner(null);
+  };
+
+  const zeroScore = () => {
+    setGameMatrix(STARTING_GAME_MATRIX);
+    setPlayerTurn(1);
+    setScore({ player1: 0, player2: 0 });
   };
 
   const checkWinner = (
@@ -82,7 +94,7 @@ function Connect4() {
       consecutiveCellCount,
       direction1,
       direction2,
-      checkingFirstDirection
+      firstDirection
     ) => {
       //
       const newPos = {
@@ -108,7 +120,7 @@ function Connect4() {
         newPos.row < updatedGameMatrix.length &&
         newPos.column >= 0 &&
         newPos.column <= updatedGameMatrix[0].length &&
-        checkingFirstDirection
+        firstDirection
       ) {
         // second if check
         //checks if cell in check is same as player turn
@@ -126,7 +138,7 @@ function Connect4() {
           //handles if cell check is not the same as player
           //checks to see if we are still in first direction, then set count to 0
           //starts checking cells from the last cell that was checked and moves in the opposite direction while incrementing count
-        } else if (checkingFirstDirection) {
+        } else if (firstDirection) {
           consecutiveCellCount = 0;
           checkDirection(
             currentCoinRow,
@@ -151,7 +163,7 @@ function Connect4() {
         newPos2.column >= 0 &&
         newPos2.column <= updatedGameMatrix[0].length &&
         updatedGameMatrix[newPos2.row][newPos2.column] === playerTurn &&
-        !checkingFirstDirection
+        !firstDirection
       ) {
         consecutiveCellCount++;
         checkDirection(
@@ -211,27 +223,6 @@ function Connect4() {
       true
     );
   }; // End of checkWinner
-
-  const handleRestart = () => {
-    setGameMatrix(
-      Array.from({ length: rows }, () =>
-        Array.from({ length: columns }, () => null)
-      )
-    );
-    setPlayerTurn(1);
-    setShowWinnerBanner(false);
-    setWinner(null);
-  };
-
-  const zeroScore = () => {
-    setScore({ player1: 0, player2: 0 });
-    setPlayerTurn(1);
-    setGameMatrix(
-      Array.from({ length: rows }, () =>
-        Array.from({ length: columns }, () => null)
-      )
-    );
-  };
 
   return (
     <div className="connect4-container">
