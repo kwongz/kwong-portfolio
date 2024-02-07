@@ -3,7 +3,6 @@ import connect4Pic from "../images/connect4.png";
 import ticTacToePic from "../images/tic-tac-toe.png";
 import kwEcommerce from "../images/kw-ecommerce.png";
 import genesis from "../images/genesis.png";
-import { Link } from "react-router-dom";
 
 function Projects({ projectHidden }) {
   return (

@@ -3,8 +3,6 @@ import Cell from "./Cell";
 import WinnerBanner from "./WinnerBanner";
 import ScoreBoard from "./ScoreBoard";
 import { useState, useEffect } from "react";
-import db from "./firebase";
-import { collection } from "firebase/firestore";
 
 function Tictactoe() {
   const STARTING_GAME_MATRIX = Array(9).fill(null);
@@ -14,9 +12,6 @@ function Tictactoe() {
   const [winner, setWinner] = useState(null);
   const [showWinnerBanner, setShowWinnerBanner] = useState(false);
   const [score, setScore] = useState({ player1: 0, player2: 0 });
-
-  const collectionRef = collection(db, "cities");
-  console.log(collectionRef);
 
   const winningCombinations = [
     // Rows
