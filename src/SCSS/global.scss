@@ -76,16 +76,14 @@ body {
   box-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 15px rgba(0, 0, 0, 0.8);
 }
 
-.Zero-score-button {
+.game-button {
   display: inline-block;
-  margin-top: 50px;
   color: $silver;
   background-color: $gunmetal;
   width: 200px;
   border-radius: 20px;
   padding: 10px;
   font-size: 20px;
-  margin-left: 10px;
   border: 3px solid black;
 
   &:hover,
@@ -126,9 +124,16 @@ body {
   }
 }
 
+.top-banner-container {
+  margin: 0 auto;
+  margin-top: 25px;
+  width: 500px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
 .player-turn-banner {
   display: inline-block;
-  margin-top: 50px;
   color: $silver;
   background-color: $gunmetal;
   width: 200px;
@@ -163,6 +168,28 @@ a {
   color: #005ca8;
 }
 
+.invite-container {
+  margin-top: 25px;
+  .invite-code {
+    display: block;
+    margin-top: 10px;
+    font-size: 20px;
+  }
+}
+
+.instructions {
+  max-width: 500px;
+  width: 85%;
+  margin: 0 auto;
+  margin-top: 25px;
+  h4 {
+    margin-bottom: 10px;
+  }
+  li {
+    margin-top: 5px;
+  }
+}
+
 //mobile styling
 
 @media (max-width: 750px) {
@@ -176,9 +203,13 @@ a {
   }
 
   .player-turn-banner,
-  .Zero-score-button {
+  .game-button {
     font-size: 18px;
     width: 150px;
+  }
+
+  .top-banner-container {
+    width: 400px;
   }
 }
 
@@ -193,8 +224,12 @@ a {
   }
 
   .player-turn-banner,
-  .Zero-score-button {
+  .game-button {
     font-size: 14px;
     width: 125px;
+  }
+
+  .top-banner-container {
+    width: 350px;
   }
 }

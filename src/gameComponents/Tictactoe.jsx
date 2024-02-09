@@ -3,6 +3,7 @@ import Cell from "./Cell";
 import WinnerBanner from "./WinnerBanner";
 import ScoreBoard from "./ScoreBoard";
 import StartBanner from "./StartBanner";
+import CopyButton from "./CopyButton";
 import { useState, useEffect } from "react";
 import { db } from "../config/firestore";
 import {
@@ -142,7 +143,7 @@ function Tictactoe() {
     <div className="tic-tac-toe-container">
       {showStartBanner && (
         <div className="overlay">
-          <div className="winner-banner-container">
+          <div className="banner-container">
             <StartBanner
               handleNewGame={generateNewGame}
               handleInvite={handleInvitedGame}
@@ -156,10 +157,12 @@ function Tictactoe() {
         winner={winner}
         gameMode={"tic-tac-toe"}
       />
-      <div className="player-turn-banner">Player {playerTurn}'s Turn</div>
-      <button className="Zero-score-button" onClick={() => zeroScore()}>
-        Reset Scores
-      </button>
+      <div className="top-banner-container">
+        <div className="player-turn-banner">Player {playerTurn}'s Turn</div>
+        <button className="game-button" onClick={() => zeroScore()}>
+          Reset Scores
+        </button>
+      </div>
       <div className="gameboard">
         {gameMatrix.map((status, index) => (
           <Cell
@@ -171,13 +174,26 @@ function Tictactoe() {
         ))}
         {showWinnerBanner && (
           <div className="overlay">
-            <div className="winner-banner-container">
+            <div className="banner-container">
               <WinnerBanner winner={winner} handleRestart={handleRestart} />
             </div>
           </div>
         )}
       </div>
-      <div>gameID = {gameRef.id}</div>
+      <ul
+        className="instructions
+      "
+      >
+        <h4>Instructions</h4>
+        <li>Copy https://kwongz.github.io/kwong-portfolio/#/tic-tac-toe</li>
+        <li>Open in new Tab</li>
+        <li>Copy and submit Game ID in Join Game of New Tab</li>
+        <li>Enjoy!</li>
+      </ul>
+      <div className="invite-container">
+        <CopyButton text={gameRef.id} />
+        <span className="invite-code">{gameRef.id}</span>
+      </div>
     </div>
   );
 }

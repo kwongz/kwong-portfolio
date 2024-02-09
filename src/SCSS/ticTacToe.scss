@@ -63,18 +63,34 @@
   align-items: center;
 }
 
-/* Styling for winner banner container */
-.winner-banner-container {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 200px;
-  height: 200px;
+/* Styling for banner container */
+.banner-container {
+  width: 300px;
+  height: 300px;
   text-align: center;
   background-color: #b0c4de;
   padding: 15px;
   border-radius: 8px;
   box-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 15px rgba(0, 0, 0, 0.8);
+}
+
+.invitation-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  input {
+    margin-bottom: 10px;
+    text-align: center;
+  }
+}
+
+.start-banner {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 
 /* Styling for restart button */
@@ -119,6 +135,11 @@
   .tic-tac-toe-container .gameboard {
     width: 400px;
     height: 400px;
+  }
+
+  .banner-container {
+    width: 250px;
+    height: 250px;
   }
 }
 @media (max-width: 450px) {
