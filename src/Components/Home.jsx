@@ -21,10 +21,10 @@ function Home() {
               </div>
               <h2>Kyle Wong</h2>
               <span className="location">
-                <i class="fa-solid fa-location-dot"></i> Toronto, ON, Canada
+                <i className="fa-solid fa-location-dot"></i> Toronto, ON, Canada
               </span>
               <span className="email">
-                <i class="fa-solid fa-envelope"></i>
+                <i className="fa-solid fa-envelope"></i>
                 <a href="mailto:Kyle.wong917@gmail.com">
                   Kyle.wong917@gmail.com
                 </a>
@@ -73,23 +73,32 @@ function Home() {
             <h3>Links</h3>
             <ul className="links">
               <li>
-                <i class="fa-brands fa-square-github"></i>
-                <a href="https://github.com/kwongz" target="_blank">
+                <i className="fa-brands fa-square-github"></i>
+                <a
+                  href="https://github.com/kwongz"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   Github
                 </a>
               </li>
               <li>
-                <i class="fa-brands fa-linkedin"></i>
+                <i className="fa-brands fa-linkedin"></i>
                 <a
                   href="https://www.linkedin.com/in/kyle-wong-410465a5/"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   LinkedIn
                 </a>
               </li>
               <li>
-                <i class="fa-brands fa-square-instagram"></i>
-                <a href="https://www.instagram.com/kwongz/" target="_blank">
+                <i className="fa-brands fa-square-instagram"></i>
+                <a
+                  href="https://www.instagram.com/kwongz/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   Instagram
                 </a>
               </li>
@@ -171,7 +180,7 @@ function Home() {
                   disabled={!projectHidden}
                   onClick={() => setProjectHidden(false)}
                 >
-                  <i class="fa-solid fa-code"></i> Projects
+                  <i className="fa-solid fa-code"></i> Projects
                 </span>
                 <span
                   className={`filter-button ${
@@ -180,7 +189,7 @@ function Home() {
                   disabled={projectHidden}
                   onClick={() => setProjectHidden(true)}
                 >
-                  <i class="fa-solid fa-code"></i> Work Experience
+                  <i className="fa-solid fa-code"></i> Work Experience
                 </span>
               </div>
               <Projects projectHidden={projectHidden} />

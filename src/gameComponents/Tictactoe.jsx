@@ -2,16 +2,74 @@ import React from "react";
 import Cell from "./Cell";
 import WinnerBanner from "./WinnerBanner";
 import ScoreBoard from "./ScoreBoard";
+import StartBanner from "./StartBanner";
 import { useState, useEffect } from "react";
+import { db } from "../config/firestore";
+import {
+  collection,
+  addDoc,
+  updateDoc,
+  onSnapshot,
+  doc,
+} from "firebase/firestore";
 
 function Tictactoe() {
   const STARTING_GAME_MATRIX = Array(9).fill(null);
+  const STARTING_PLAYER_TURN = 1;
   // states
-  const [playerTurn, setPlayerTurn] = useState(1);
+  const [playerTurn, setPlayerTurn] = useState(STARTING_PLAYER_TURN);
   const [gameMatrix, setGameMatrix] = useState(STARTING_GAME_MATRIX);
   const [winner, setWinner] = useState(null);
   const [showWinnerBanner, setShowWinnerBanner] = useState(false);
   const [score, setScore] = useState({ player1: 0, player2: 0 });
+  const [showStartBanner, setShowStartBanner] = useState(true);
+  const [gameInviteId, setGameInviteId] = useState(null);
+  //firebase practice
+  const [gameRef, setGameRef] = useState("");
+  const [playerNumber, setPlayerNumber] = useState(null);
+
+  useEffect(() => {
+    if (gameInviteId) {
+      const firestoreGameRef = doc(db, "ticTacToe", gameInviteId);
+      getFirestoreGameData(firestoreGameRef);
+      setGameRef(firestoreGameRef);
+    }
+  }, [gameInviteId]);
+
+  const generateNewGame = async () => {
+    const docRef = await addDoc(collection(db, "ticTacToe"), {
+      gameMatrix: Array(9).fill(null),
+      playerTurn: 1,
+    });
+    setGameRef(docRef);
+    getFirestoreGameData(docRef);
+    setShowStartBanner(false);
+    setPlayerNumber(1);
+  };
+
+  const handleInvitedGame = (playerInvite) => {
+    setGameInviteId(playerInvite);
+    setShowStartBanner(false);
+    setPlayerNumber(2);
+  };
+
+  const getFirestoreGameData = async (firestoreGameRef) => {
+    const unsub = onSnapshot(firestoreGameRef, (doc) => {
+      const firebaseGameObject = doc.data();
+      setGameMatrix(firebaseGameObject.gameMatrix);
+      setPlayerTurn(firebaseGameObject.playerTurn);
+    });
+  };
+
+  const updateFirebaseGameMatrix = (
+    updatedLocalGameMatrix,
+    updatedPlayerTurn
+  ) => {
+    updateDoc(gameRef, {
+      gameMatrix: [...updatedLocalGameMatrix],
+      playerTurn: updatedPlayerTurn,
+    });
+  };
 
   const winningCombinations = [
     // Rows
@@ -39,11 +97,12 @@ function Tictactoe() {
   }, [gameMatrix]);
 
   const handleTurn = (index) => {
-    if (gameMatrix[index] === null) {
+    if (gameMatrix[index] === null && playerNumber === playerTurn) {
       const updatedGameMatrix = [...gameMatrix];
       updatedGameMatrix[index] = playerTurn;
-      setGameMatrix(updatedGameMatrix);
-      setPlayerTurn(playerTurn === 1 ? 2 : 1);
+      const updatedPlayerTurn = playerTurn === 1 ? 2 : 1;
+      // firebase updates
+      updateFirebaseGameMatrix(updatedGameMatrix, updatedPlayerTurn);
     }
   };
 
@@ -64,24 +123,33 @@ function Tictactoe() {
         return gameMatrix[a]; // Return 'X' or 'O' as the winner
       }
     }
+
     return null; // Return null if there's no winner yet
   };
 
   const handleRestart = () => {
-    setGameMatrix(STARTING_GAME_MATRIX);
-    setPlayerTurn(1);
+    updateFirebaseGameMatrix(STARTING_GAME_MATRIX, STARTING_PLAYER_TURN);
     setShowWinnerBanner(false);
     setWinner(null);
   };
 
   const zeroScore = () => {
+    updateFirebaseGameMatrix(STARTING_GAME_MATRIX, STARTING_PLAYER_TURN);
     setScore({ player1: 0, player2: 0 });
-    setPlayerTurn(1);
-    setGameMatrix(STARTING_GAME_MATRIX);
   };
 
   return (
     <div className="tic-tac-toe-container">
+      {showStartBanner && (
+        <div className="overlay">
+          <div className="winner-banner-container">
+            <StartBanner
+              handleNewGame={generateNewGame}
+              handleInvite={handleInvitedGame}
+            />
+          </div>
+        </div>
+      )}
       <ScoreBoard
         player1={score.player1}
         player2={score.player2}
@@ -109,6 +177,7 @@ function Tictactoe() {
           </div>
         )}
       </div>
+      <div>gameID = {gameRef.id}</div>
     </div>
   );
 }

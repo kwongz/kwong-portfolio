@@ -10,6 +10,7 @@ function ComponentName({ projectHidden }) {
           <a
             href="https://www.mirvish.com/shows/harry-potter-and-the-cursed-child"
             target="_blank"
+            rel="noreferrer"
           >
             <div className="work-title">
               <h3>Ensemble/Aeralist - Ed Mirvish Harry Potter</h3>
@@ -28,7 +29,7 @@ function ComponentName({ projectHidden }) {
           </a>
         </li>
         <li className="work-card">
-          <a href="https://innocean.ca/" target="_blank">
+          <a href="https://innocean.ca/" target="_blank" rel="noreferrer">
             <div className="work-title">
               <h3>
                 Jr. Front-end Developer -{" "}
@@ -59,6 +60,7 @@ function ComponentName({ projectHidden }) {
           <a
             href="https://www.royalcaribbean.com/experience/cruise-shows-and-entertainment"
             target="_blank"
+            rel="noreferrer"
           >
             <div className="work-title">
               <h3>Dancer/Aeralist/Acrobat - Royal Caribbean Entertainment</h3>
@@ -80,6 +82,7 @@ function ComponentName({ projectHidden }) {
           <a
             href="https://uwaterloo.ca/biomechanics-of-human-mobility-lab/"
             target="_blank"
+            rel="noreferrer"
           >
             <div className="work-title">
               <h3>Biomechanics Research Assistant - University of Waterloo</h3>

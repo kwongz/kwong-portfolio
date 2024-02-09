@@ -10,7 +10,11 @@ function Projects({ projectHidden }) {
       <div className="project-container">
         <h3>Genesis Canadian Website</h3>
         <div className="project-image-container">
-          <a href="https://www.genesis.com/ca/en/main.html" target="_blank">
+          <a
+            href="https://www.genesis.com/ca/en/main.html"
+            target="_blank"
+            rel="noreferrer"
+          >
             <img src={genesis} />
           </a>
         </div>
@@ -33,6 +37,7 @@ function Projects({ projectHidden }) {
             className="project-link"
             href="https://www.genesis.com/ca/en/main.html"
             target="_blank"
+            rel="noreferrer"
           >
             Link
           </a>
@@ -44,6 +49,7 @@ function Projects({ projectHidden }) {
           <a
             href="https://kwongz.github.io/kwong-portfolio/#/connect4"
             target="_blank"
+            rel="noreferrer"
           >
             <img src={connect4Pic} />
           </a>
@@ -62,6 +68,7 @@ function Projects({ projectHidden }) {
             className="project-link"
             href="https://github.com/kwongz/kwong-portfolio/tree/main/src/gameComponents"
             target="_blank"
+            rel="noreferrer"
           >
             Code
           </a>
@@ -69,6 +76,7 @@ function Projects({ projectHidden }) {
             className="project-link"
             href="https://kwongz.github.io/kwong-portfolio/#/connect4"
             target="_blank"
+            rel="noreferrer"
           >
             Link
           </a>
@@ -80,6 +88,7 @@ function Projects({ projectHidden }) {
           <a
             href="https://kwongz.github.io/kwong-portfolio/#/tic-tac-toe"
             target="_blank"
+            rel="noreferrer"
           >
             <img src={ticTacToePic} />
           </a>
@@ -96,6 +105,7 @@ function Projects({ projectHidden }) {
             className="project-link"
             href="https://github.com/kwongz/kwong-portfolio/tree/master/src/gameComponents"
             target="_blank"
+            rel="noreferrer"
           >
             Code
           </a>
@@ -103,6 +113,7 @@ function Projects({ projectHidden }) {
             className="project-link"
             href="https://kwongz.github.io/kwong-portfolio/#/tic-tac-toe"
             target="_blank"
+            rel="noreferrer"
           >
             Link
           </a>
@@ -111,7 +122,11 @@ function Projects({ projectHidden }) {
       <div className="project-container">
         <h3>Make-up Store</h3>
         <div className="project-image-container">
-          <a href="https://kwongz.github.io/KW-ECommerce-App/" target="_blank">
+          <a
+            href="https://kwongz.github.io/KW-ECommerce-App/"
+            target="_blank"
+            rel="noreferrer"
+          >
             <img src={kwEcommerce} />
           </a>
         </div>
@@ -130,6 +145,7 @@ function Projects({ projectHidden }) {
             className="project-link"
             href="https://github.com/kwongz/KW-ECommerce-App"
             target="_blank"
+            rel="noreferrer"
           >
             Code
           </a>
@@ -137,6 +153,7 @@ function Projects({ projectHidden }) {
             className="project-link"
             href="https://kwongz.github.io/KW-ECommerce-App/"
             target="_blank"
+            rel="noreferrer"
           >
             Link
           </a>
