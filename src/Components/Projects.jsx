@@ -8,6 +8,44 @@ function Projects({ projectHidden }) {
   return (
     <div className={`projects-section ${projectHidden ? "hidden" : ""}`}>
       <div className="project-container">
+        <h3>Tic-Tac-Toe</h3>
+        <div className="project-image-container">
+          <a
+            href="https://kwongz.github.io/kwong-portfolio/#/tic-tac-toe"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img src={ticTacToePic} />
+          </a>
+        </div>
+        <div className="project-description-container">
+          <h4>React Firestore Project</h4>
+          <p>
+            A <span className="copy-highlight">User Friendly</span> tic-tac-toe
+            game, with multiple{" "}
+            <span className="copy-highlight">Reusuable UI Components</span> for
+            future projects. ** Recently added Firestore for cross browser
+            integration. Play with others using game
+          </p>
+          <a
+            className="project-link"
+            href="https://github.com/kwongz/kwong-portfolio/tree/master/src/gameComponents"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Code
+          </a>
+          <a
+            className="project-link"
+            href="https://kwongz.github.io/kwong-portfolio/#/tic-tac-toe"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Link
+          </a>
+        </div>
+      </div>
+      <div className="project-container">
         <h3>Genesis Canadian Website</h3>
         <div className="project-image-container">
           <a
@@ -75,43 +113,6 @@ function Projects({ projectHidden }) {
           <a
             className="project-link"
             href="https://kwongz.github.io/kwong-portfolio/#/connect4"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Link
-          </a>
-        </div>
-      </div>
-      <div className="project-container">
-        <h3>Tic-Tac-Toe</h3>
-        <div className="project-image-container">
-          <a
-            href="https://kwongz.github.io/kwong-portfolio/#/tic-tac-toe"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <img src={ticTacToePic} />
-          </a>
-        </div>
-        <div className="project-description-container">
-          <h4>React Project</h4>
-          <p>
-            A <span className="copy-highlight">User Friendly</span> tic-tac-toe
-            game, with multiple{" "}
-            <span className="copy-highlight">Reusuable UI Components</span> for
-            future projects.
-          </p>
-          <a
-            className="project-link"
-            href="https://github.com/kwongz/kwong-portfolio/tree/master/src/gameComponents"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Code
-          </a>
-          <a
-            className="project-link"
-            href="https://kwongz.github.io/kwong-portfolio/#/tic-tac-toe"
             target="_blank"
             rel="noreferrer"
           >
