@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/kwong-portfolio/static/css/main.c2c2003b.css",
+    "main.css": "/kwong-portfolio/static/css/main.b316b565.css",
     "main.js": "/kwong-portfolio/static/js/main.e88150c9.js",
     "static/js/787.1fd9f004.chunk.js": "/kwong-portfolio/static/js/787.1fd9f004.chunk.js",
     "static/media/genesis.png": "/kwong-portfolio/static/media/genesis.8293c7d20ee9131b539b.png",
@@ -11,12 +11,12 @@
     "static/media/tic-tac-toe.png": "/kwong-portfolio/static/media/tic-tac-toe.9c507ba5547d6c5d1c35.png",
     "static/media/KyleWongResume2024.pdf": "/kwong-portfolio/static/media/KyleWongResume2024.00d351f4de654edeb4df.pdf",
     "index.html": "/kwong-portfolio/index.html",
-    "main.c2c2003b.css.map": "/kwong-portfolio/static/css/main.c2c2003b.css.map",
+    "main.b316b565.css.map": "/kwong-portfolio/static/css/main.b316b565.css.map",
     "main.e88150c9.js.map": "/kwong-portfolio/static/js/main.e88150c9.js.map",
     "787.1fd9f004.chunk.js.map": "/kwong-portfolio/static/js/787.1fd9f004.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c2c2003b.css",
+    "static/css/main.b316b565.css",
     "static/js/main.e88150c9.js"
   ]
 }
