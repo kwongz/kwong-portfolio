@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
-//Originally API was kept in .env, but google's firebase allows for API key restrictions vis HTTP reffers
+//Originally API was kept in .env, but google's firebase allows for API key restrictions vis HTTP referrers
 const firebaseConfig = {
 	apiKey: "AIzaSyBp643bq34XtIN_A9nhNy8EaFqnrfIvlwo",
 	authDomain: "tictactoe-871b2.firebaseapp.com",
