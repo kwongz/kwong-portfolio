@@ -97,22 +97,6 @@
 
 /* Styling for restart button */
 .restart {
-  display: block;
-  margin: 10px;
-  margin-top: 30px;
-  width: 100px;
-  height: 40px;
-  background-color: #b0c4de;
-  color: #333;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 15px rgba(0, 0, 0, 0.8);
-  &:hover,
-  &:focus {
-    background-color: $gunmetal;
-    color: $silver;
-  }
 }
 
 // handle animation on win

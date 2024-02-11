@@ -177,6 +177,16 @@ a {
   }
 }
 
+.winnerBanner {
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .restart {
+    margin-top: 80px;
+  }
+}
+
 .instructions {
   max-width: 500px;
   width: 85%;
