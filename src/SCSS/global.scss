@@ -140,6 +140,8 @@ body {
   border-radius: 20px;
   padding: 10px;
   font-size: 20px;
+  justify-content: center;
+  align-items: center;
 }
 
 img {
@@ -169,7 +171,7 @@ a {
 }
 
 .invite-container {
-  margin-top: 25px;
+  margin: 25px 0px;
   .invite-code {
     display: block;
     margin-top: 10px;
