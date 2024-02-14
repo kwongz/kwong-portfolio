@@ -14,7 +14,7 @@ function WinnerBanner({ handleNewGame, handleInvite }) {
         <li>Wait for Game ID Invite</li>
       </ul>
       <form className="invitation-form" id="invitationForm">
-        <label for="gameId"></label>
+        <label htmlFor="gameId"></label>
         <input
           type="text"
           id="gameId"
@@ -27,7 +27,7 @@ function WinnerBanner({ handleNewGame, handleInvite }) {
         <button
           className="game-button
         "
-          onClick={() => handleInvite(playerInvite)}
+          onClick={(e) => handleInvite(e, playerInvite)}
           type="submit"
         >
           Join Game

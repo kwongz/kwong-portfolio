@@ -1,6 +1,12 @@
 // Gameboard styling with variables
 .tic-tac-toe-container {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100vh;
+  max-height: 1000px;
+  min-height: 900px;
 
   .gameboard {
     grid-template-columns: repeat(3, 1fr);
@@ -8,6 +14,7 @@
     gap: 5px;
     width: 500px;
     height: 500px;
+    margin-top: 0;
   }
 }
 

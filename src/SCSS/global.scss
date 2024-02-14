@@ -95,13 +95,11 @@ body {
 }
 
 .scoreboard-container {
-  display: block;
   margin: 0 auto;
   width: 500px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 50px;
   position: relative;
   z-index: 50;
 
@@ -126,38 +124,34 @@ body {
 
 .top-banner-container {
   margin: 0 auto;
-  margin-top: 25px;
   width: 500px;
   display: flex;
   justify-content: space-evenly;
 }
 
 .player-turn-banner {
-  display: inline-block;
+  display: flex;
   color: $silver;
   background-color: $gunmetal;
-  width: 200px;
   border-radius: 20px;
+  width: 200px;
   padding: 10px;
   font-size: 20px;
   justify-content: center;
   align-items: center;
 }
 
+.player-indication-container {
+  h3 {
+    margin: 0;
+    text-transform: capitalize;
+  }
+}
+
 img {
   width: 100%;
   height: auto;
   display: block;
-}
-
-.divider-dark {
-  background-color: #212f3b;
-  margin: 0;
-}
-
-.divider-light {
-  background-color: #cbd6dd;
-  margin: 0;
 }
 
 a {
@@ -171,7 +165,6 @@ a {
 }
 
 .invite-container {
-  margin: 25px 0px;
   .invite-code {
     display: block;
     margin-top: 10px;
@@ -193,7 +186,6 @@ a {
   max-width: 500px;
   width: 85%;
   margin: 0 auto;
-  margin-top: 25px;
   h4 {
     margin-bottom: 10px;
   }
@@ -206,6 +198,7 @@ a {
 
 @media (max-width: 750px) {
   .scoreboard-container {
+    max-width: 500px;
     width: 80%;
     div {
       width: 150px;
