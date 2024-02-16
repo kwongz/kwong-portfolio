@@ -27,7 +27,7 @@ function Projects({ projectHidden }) {
             future projects. ** Recently added{" "}
             <span className="copy-highlight">Firestore</span> for{" "}
             <span className="copy-highlight">cross browser</span> integration.
-            Play with others using game
+            Unique Player ID, allows 2 players in one game at a time.
           </p>
           <a
             className="project-link"

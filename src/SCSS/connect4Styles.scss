@@ -1,7 +1,11 @@
-
-
 .connect4-container {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100vh;
+  max-height: 1200px;
+  min-height: 900px;
   .gameboard {
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(6, 1fr);

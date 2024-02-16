@@ -29,6 +29,7 @@ function Tictactoe() {
   const [showWinnerBanner, setShowWinnerBanner] = useState(false);
   const [score, setScore] = useState({ player1: 0, player2: 0 });
   const [showStartBanner, setShowStartBanner] = useState(true);
+  const [restartTracker, setRestartTracker] = useState({});
 
   const generatePlayerId = () => {
     const timestamp = new Date().getTime();
@@ -44,7 +45,7 @@ function Tictactoe() {
     setPlayerNumber(playerNumber);
     const firebaseCurrentGameDoc = await getDoc(gameRef);
 
-    if (firebaseCurrentGameDoc.exists) {
+    if (firebaseCurrentGameDoc.data()) {
       const data = firebaseCurrentGameDoc.data();
       if (
         (playerNumber === STARTING_PLAYER_TURN && !data.player1Id) ||
@@ -56,23 +57,27 @@ function Tictactoe() {
         getFirestoreGameData(gameRef);
         setGameRef(gameRef);
         setShowStartBanner(false);
-      } else alert("Game is Full, Please create new game or enter new game ID");
-    }
+      } else alert("Game is Full, Please create new game");
+    } else alert("Game Not Found");
   };
 
   const handleInvite = (e, playerInvite) => {
     e.preventDefault();
     const firestoreGameRef = doc(db, "ticTacToe", playerInvite);
     console.log(firestoreGameRef);
-    console.log(playerInvite);
-    handlePlayerIdUpdate(firestoreGameRef, INVITED_PLAYER_TURN);
+    if (firestoreGameRef === undefined) {
+      alert("game not found");
+    } else {
+      handlePlayerIdUpdate(firestoreGameRef, INVITED_PLAYER_TURN);
+    }
   };
 
   const generateNewGame = async () => {
     const firestoreGameRef = await addDoc(collection(db, "ticTacToe"), {
       gameMatrix: Array(9).fill(null),
       playerTurn: STARTING_PLAYER_TURN,
-      restartCounter: 0,
+      restart: { 1: false, 2: false },
+      score: { player1: 0, player2: 0 },
     });
     handlePlayerIdUpdate(firestoreGameRef, STARTING_PLAYER_TURN);
   };
@@ -82,7 +87,10 @@ function Tictactoe() {
       const firebaseGameObject = doc.data();
       setGameMatrix(firebaseGameObject.gameMatrix);
       setPlayerTurn(firebaseGameObject.playerTurn);
+      setRestartTracker(firebaseGameObject.restart);
+      setScore(firebaseGameObject.score);
     });
+    return unsub;
   };
 
   const updateFirebaseGameMatrix = (
@@ -118,7 +126,7 @@ function Tictactoe() {
       handleScore(winner);
       setShowWinnerBanner(true);
     }
-  }, [gameMatrix]);
+  }, [playerTurn]);
 
   const handleTurn = (index) => {
     if (gameMatrix[index] === null && playerNumber === playerTurn) {
@@ -133,7 +141,9 @@ function Tictactoe() {
   const handleScore = (winningPlayer) => {
     const updatedScore = { ...score };
     updatedScore[`player${winningPlayer}`] += 1;
-    setScore(updatedScore);
+    updateDoc(gameRef, {
+      score: { ...updatedScore },
+    });
   };
 
   const checkWinner = (gameMatrix) => {
@@ -144,7 +154,7 @@ function Tictactoe() {
         gameMatrix[a] === gameMatrix[b] &&
         gameMatrix[a] === gameMatrix[c]
       ) {
-        return gameMatrix[a]; // Return 'X' or 'O' as the winner
+        return gameMatrix[a]; // Return '1' or '2' as the winner
       }
     }
 
@@ -152,10 +162,23 @@ function Tictactoe() {
   };
 
   const handleRestart = () => {
-    updateFirebaseGameMatrix(STARTING_GAME_MATRIX, STARTING_PLAYER_TURN);
-    setShowWinnerBanner(false);
-    setWinner(null);
+    updateDoc(gameRef, {
+      restart: { ...restartTracker, [playerNumber]: true },
+    });
   };
+
+  useEffect(() => {
+    if (restartTracker) {
+      if (restartTracker[1] && restartTracker[2]) {
+        setShowWinnerBanner(false);
+        setWinner(null);
+        updateFirebaseGameMatrix(STARTING_GAME_MATRIX, STARTING_PLAYER_TURN);
+        updateDoc(gameRef, {
+          restart: { 1: false, 2: false },
+        });
+      }
+    }
+  }, [restartTracker]);
 
   const zeroScore = () => {
     updateFirebaseGameMatrix(STARTING_GAME_MATRIX, STARTING_PLAYER_TURN);
@@ -208,7 +231,12 @@ function Tictactoe() {
         {showWinnerBanner && (
           <div className="overlay">
             <div className="banner-container">
-              <WinnerBanner winner={winner} handleRestart={handleRestart} />
+              <WinnerBanner
+                winner={winner}
+                handleRestart={handleRestart}
+                restartTracker={restartTracker}
+                playerNumber={playerNumber}
+              />
             </div>
           </div>
         )}

@@ -1,8 +1,19 @@
 import React from "react";
 import Cell from "./Cell";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import WinnerBanner from "./WinnerBanner";
+import StartBanner from "./StartBanner";
 import ScoreBoard from "./ScoreBoard";
+import CopyButton from "./CopyButton";
+import { db } from "../config/firestore";
+import {
+  collection,
+  addDoc,
+  updateDoc,
+  onSnapshot,
+  doc,
+  getDoc,
+} from "firebase/firestore";
 
 function Connect4() {
   const rows = 6;
@@ -10,13 +21,106 @@ function Connect4() {
   const STARTING_GAME_MATRIX = Array.from({ length: rows }, () =>
     Array.from({ length: columns }, () => null)
   );
+  const STARTING_PLAYER_TURN = 1;
+  const INVITED_PLAYER_TURN = 2;
 
   const [playerTurn, setPlayerTurn] = useState(1);
   const [winner, setWinner] = useState(false);
   const [showWinnerBanner, setShowWinnerBanner] = useState(false);
   const [score, setScore] = useState({ player1: 0, player2: 0 });
   const [gameMatrix, setGameMatrix] = useState(STARTING_GAME_MATRIX);
+  //firebase state
+  const [showStartBanner, setShowStartBanner] = useState(true);
+  const [restartTracker, setRestartTracker] = useState({});
+  const [gameRef, setGameRef] = useState("");
+  const [playerNumber, setPlayerNumber] = useState(null);
+  const [playerId, setPlayerId] = useState(null);
 
+  //firebase functions additions
+  const generatePlayerId = () => {
+    const timestamp = new Date().getTime();
+    const randomPart = Math.random().toString(36).substr(2, 9); // Random alphanumeric string
+    const playerId = `${timestamp}-${randomPart}`;
+    return playerId;
+  };
+
+  const handlePlayerIdUpdate = async (gameRef, playerNumber) => {
+    const player = `player${playerNumber}Id`;
+    const newId = generatePlayerId();
+    setPlayerId(newId);
+    setPlayerNumber(playerNumber);
+    const firebaseCurrentGameDoc = await getDoc(gameRef);
+
+    if (firebaseCurrentGameDoc.data()) {
+      const data = firebaseCurrentGameDoc.data();
+      if (
+        (playerNumber === STARTING_PLAYER_TURN && !data.player1Id) ||
+        (playerNumber === INVITED_PLAYER_TURN && !data.player2Id)
+      ) {
+        updateDoc(gameRef, {
+          [player]: newId,
+        });
+        getFirestoreGameData(gameRef);
+        setGameRef(gameRef);
+        setShowStartBanner(false);
+      } else alert("Game is Full, Please create new game");
+    } else alert("Game Not Found");
+  };
+
+  const handleInvite = (e, playerInvite) => {
+    e.preventDefault();
+    const firestoreGameRef = doc(db, "connect4", playerInvite);
+    console.log(firestoreGameRef);
+    if (firestoreGameRef === undefined) {
+      alert("game not found");
+    } else {
+      handlePlayerIdUpdate(firestoreGameRef, INVITED_PLAYER_TURN);
+    }
+  };
+
+  const generateNewGame = async () => {
+    const firestoreGameRef = await addDoc(collection(db, "connect4"), {
+      gameMatrix: STARTING_GAME_MATRIX.flat(),
+      playerTurn: STARTING_PLAYER_TURN,
+      restart: { 1: false, 2: false },
+      score: { player1: 0, player2: 0 },
+    });
+    handlePlayerIdUpdate(firestoreGameRef, STARTING_PLAYER_TURN);
+  };
+
+  const getFirestoreGameData = async (firestoreGameRef) => {
+    const unsub = onSnapshot(firestoreGameRef, (doc) => {
+      const firebaseGameObject = doc.data();
+      const subArraySize = columns;
+      const reNestedArray = [];
+      for (
+        let i = 0;
+        i < firebaseGameObject.gameMatrix.length;
+        i += subArraySize
+      ) {
+        reNestedArray.push(
+          firebaseGameObject.gameMatrix.slice(i, i + subArraySize)
+        );
+      }
+      setGameMatrix(reNestedArray);
+      setPlayerTurn(firebaseGameObject.playerTurn);
+      setRestartTracker(firebaseGameObject.restart);
+      setScore(firebaseGameObject.score);
+    });
+    return unsub;
+  };
+
+  const updateFirebaseGameMatrix = (
+    updatedLocalGameMatrix,
+    updatedPlayerTurn
+  ) => {
+    updateDoc(gameRef, {
+      gameMatrix: [...updatedLocalGameMatrix.flat()],
+      playerTurn: updatedPlayerTurn,
+    });
+  };
+
+  //end of firebase additions
   const renderBoard = () => {
     const board = [];
     for (let row = 0; row < gameMatrix.length; row++) {
@@ -37,7 +141,9 @@ function Connect4() {
   const handleScore = (winningPlayer) => {
     const updatedScore = { ...score };
     updatedScore[`player${winningPlayer}`] += 1;
-    setScore(updatedScore);
+    updateDoc(gameRef, {
+      score: { ...updatedScore },
+    });
   };
 
   const handleTurn = (column) => {
@@ -46,20 +152,42 @@ function Connect4() {
       if (gameMatrix[row][column] === null) {
         const updatedGameMatrix = [...gameMatrix];
         updatedGameMatrix[row][column] = playerTurn;
-        setGameMatrix(updatedGameMatrix);
-        setPlayerTurn(playerTurn === 1 ? 2 : 1);
+        // setGameMatrix(updatedGameMatrix);
+        // setPlayerTurn(playerTurn === 1 ? 2 : 1);
+        const updatedPlayerTurn = playerTurn === 1 ? 2 : 1;
+        // firebase updates
+        updateFirebaseGameMatrix(updatedGameMatrix, updatedPlayerTurn);
         checkWinner(updatedGameMatrix, row, column); //row and column represent the position of the dropped coin
         return;
       }
     }
   };
 
+  // const handleRestart = () => {
+  //   setGameMatrix(STARTING_GAME_MATRIX);
+  //   setPlayerTurn(1);
+  //   setShowWinnerBanner(false);
+  //   setWinner(null);
+  // };
+
   const handleRestart = () => {
-    setGameMatrix(STARTING_GAME_MATRIX);
-    setPlayerTurn(1);
-    setShowWinnerBanner(false);
-    setWinner(null);
+    updateDoc(gameRef, {
+      restart: { ...restartTracker, [playerNumber]: true },
+    });
   };
+
+  useEffect(() => {
+    if (restartTracker) {
+      if (restartTracker[1] && restartTracker[2]) {
+        setShowWinnerBanner(false);
+        setWinner(null);
+        updateFirebaseGameMatrix(STARTING_GAME_MATRIX, STARTING_PLAYER_TURN);
+        updateDoc(gameRef, {
+          restart: { 1: false, 2: false },
+        });
+      }
+    }
+  }, [restartTracker]);
 
   const zeroScore = () => {
     setGameMatrix(STARTING_GAME_MATRIX);
@@ -224,26 +352,71 @@ function Connect4() {
     );
   }; // End of checkWinner
 
+  useEffect(() => {
+    checkWinner(gameMatrix);
+  }, [gameMatrix]); //check why connect 4 dependecy works with gameMatrix and not with playerTurn, but opposite applies in tic-tac-toe
+
   return (
     <div className="connect4-container">
+      {showStartBanner && (
+        <div className="overlay">
+          <div className="banner-container">
+            <StartBanner
+              handleNewGame={generateNewGame}
+              handleInvite={handleInvite}
+            />
+          </div>
+        </div>
+      )}
+      <div className="player-id-container">
+        <h3>
+          Player{playerNumber} ID : {playerId}
+        </h3>
+      </div>
       <ScoreBoard
         player1={score.player1}
         player2={score.player2}
         winner={winner}
         gameMode={"connect4"}
       />
-      <div className="player-turn-banner">Player {playerTurn}'s Turn</div>
-      <button className="Zero-score-button" onClick={() => zeroScore()}>
-        Reset Scores
-      </button>
+      <div className="top-banner-container">
+        <div className="player-turn-banner">
+          <span>Player {playerTurn}'s Turn</span>
+        </div>
+        <button className="game-button" onClick={() => zeroScore()}>
+          Reset Scores
+        </button>
+      </div>
+      <div className="player-indication-container">
+        <h3>{playerNumber ? `you are player ${playerNumber}` : ""}</h3>
+      </div>
       <div className="gameboard">{renderBoard()}</div>
       {showWinnerBanner && (
         <div className="overlay">
-          <div className="winner-banner-container">
-            <WinnerBanner winner={winner} handleRestart={handleRestart} />
+          <div className="banner-container">
+            <WinnerBanner
+              winner={winner}
+              handleRestart={handleRestart}
+              restartTracker={restartTracker}
+              playerNumber={playerNumber}
+            />
           </div>
         </div>
       )}
+      <ul
+        className="instructions
+      "
+      >
+        <h4>Instructions</h4>
+        <li>Copy https://kwongz.github.io/kwong-portfolio/#/tic-tac-toe</li>
+        <li>Open in new Tab</li>
+        <li>Copy and submit Game ID in Join Game of New Tab</li>
+        <li>Enjoy!</li>
+      </ul>
+      <div className="invite-container">
+        <CopyButton text={gameRef.id} />
+        <span className="invite-code">{gameRef.id}</span>
+      </div>
     </div>
   );
 }
