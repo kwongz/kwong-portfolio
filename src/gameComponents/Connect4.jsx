@@ -26,7 +26,7 @@ function Connect4() {
 
   const [playerTurn, setPlayerTurn] = useState(STARTING_PLAYER_TURN);
   const [winner, setWinner] = useState(false);
-  const [showWinnerBanner, setShowWinnerBanner] = useState(false);
+  // const [showWinnerBanner, setShowWinnerBanner] = useState(false);
   const [score, setScore] = useState({ player1: 0, player2: 0 });
   const [gameMatrix, setGameMatrix] = useState(STARTING_GAME_MATRIX);
   //firebase state
@@ -70,6 +70,9 @@ function Connect4() {
 
   const handleInvite = (e, playerInvite) => {
     e.preventDefault();
+    if (playerInvite === "") {
+      return;
+    }
     const firestoreGameRef = doc(db, "connect4", playerInvite);
     if (firestoreGameRef === undefined) {
       alert("game not found");
@@ -85,6 +88,7 @@ function Connect4() {
       restart: { 1: false, 2: false },
       score: { player1: 0, player2: 0 },
       droppedCoinPos: { row: null, column: null },
+      winner: null,
     });
     handlePlayerIdUpdate(firestoreGameRef, STARTING_PLAYER_TURN);
   };
@@ -108,7 +112,8 @@ function Connect4() {
       setPlayerTurn(firebaseGameObject.playerTurn);
       setRestartTracker(firebaseGameObject.restart);
       setScore(firebaseGameObject.score);
-      setDroppedCoinPos(firebaseGameObject.droppedCoinPos);
+      // setDroppedCoinPos(firebaseGameObject.droppedCoinPos);
+      setWinner(firebaseGameObject.winner);
     });
     return unsub;
   };
@@ -153,9 +158,7 @@ function Connect4() {
 
   const handleTurn = (column) => {
     // loop through the rows in the selected column to check if they are empty, if it is empty fill it with the player, change players and exit loop
-    console.log(playerNumber === playerTurn);
     if (playerNumber === playerTurn) {
-      console.log("hello");
       for (let row = 5; row >= 0; row--) {
         if (gameMatrix[row][column] === null) {
           const updatedGameMatrix = [...gameMatrix];
@@ -168,7 +171,7 @@ function Connect4() {
             updatedPlayerTurn,
             updatedCoinPos
           );
-          // checkWinner(updatedGameMatrix, row, column);
+          checkWinner(updatedGameMatrix, row, column);
           return;
         }
       }
@@ -182,25 +185,23 @@ function Connect4() {
   };
 
   useEffect(() => {
-    if (restartTracker) {
-      if (restartTracker[1] && restartTracker[2]) {
-        setShowWinnerBanner(false);
-        setWinner(null);
-        updateFirebaseGameMatrix(
-          STARTING_GAME_MATRIX,
-          STARTING_PLAYER_TURN,
-          {}
-        );
-        updateDoc(gameRef, {
-          restart: { 1: false, 2: false },
-        });
-      }
+    if (restartTracker[1] && restartTracker[2]) {
+      updateFirebaseGameMatrix(STARTING_GAME_MATRIX, STARTING_PLAYER_TURN, {
+        row: null,
+        column: null,
+      });
+      updateDoc(gameRef, {
+        restart: { 1: false, 2: false },
+        winner: null,
+      });
     }
   }, [restartTracker]);
 
   const zeroScore = () => {
     updateFirebaseGameMatrix(STARTING_GAME_MATRIX, STARTING_PLAYER_TURN);
-    setScore({ player1: 0, player2: 0 });
+    updateDoc(gameRef, {
+      score: { player1: 0, player2: 0 },
+    });
   };
 
   const checkWinner = (
@@ -222,7 +223,7 @@ function Connect4() {
     };
 
     let consecutiveCellCount = 0;
-    const prevPlayer = playerTurn === 1 ? 2 : 1;
+    // const prevPlayer = playerTurn === 1 ? 2 : 1;
 
     // create a recursive function that checks the surrounding cells around the cell that was just updated with a player's move. If there are 4 consecutive cells filled with the same player, return them as the winner
     const checkDirection = (
@@ -245,10 +246,10 @@ function Connect4() {
       //Check logic
       //if 3 consecutive coins have been counted, return the winner
       if (consecutiveCellCount === 3) {
-        console.log("winner");
-        setWinner(prevPlayer);
-        handleScore(prevPlayer);
-        setShowWinnerBanner(true);
+        handleScore(playerTurn);
+        updateDoc(gameRef, {
+          winner: playerTurn,
+        });
       }
       //handles search in first direction
       //catches any out of bound cells
@@ -263,7 +264,7 @@ function Connect4() {
         // second if check
         //checks if cell in check is same as player turn
         //	if true, increase count, and keep searching in firstDirection, while adding the new cell coordinates to be searched
-        if (updatedGameMatrix[newPos.row][newPos.column] === prevPlayer) {
+        if (updatedGameMatrix[newPos.row][newPos.column] === playerTurn) {
           consecutiveCellCount++;
           checkDirection(
             newPos.row,
@@ -362,9 +363,9 @@ function Connect4() {
     );
   }; // End of checkWinner
 
-  useEffect(() => {
-    checkWinner(gameMatrix, droppedCoinPos.row, droppedCoinPos.column);
-  }, [playerTurn]);
+  // useEffect(() => {
+  //   checkWinner(gameMatrix, droppedCoinPos.row, droppedCoinPos.column);
+  // }, [playerTurn]);
 
   return (
     <div className="connect4-container">
@@ -401,7 +402,8 @@ function Connect4() {
         <h3>{playerNumber ? `you are player ${playerNumber}` : ""}</h3>
       </div>
       <div className="gameboard">{renderBoard()}</div>
-      {showWinnerBanner && (
+      {console.log(winner)}
+      {winner && (
         <div className="overlay">
           <div className="banner-container">
             <WinnerBanner

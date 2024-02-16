@@ -63,6 +63,9 @@ function Tictactoe() {
 
   const handleInvite = (e, playerInvite) => {
     e.preventDefault();
+    if (playerInvite === "") {
+      return;
+    }
     const firestoreGameRef = doc(db, "ticTacToe", playerInvite);
     console.log(firestoreGameRef);
     if (firestoreGameRef === undefined) {
@@ -78,6 +81,7 @@ function Tictactoe() {
       playerTurn: STARTING_PLAYER_TURN,
       restart: { 1: false, 2: false },
       score: { player1: 0, player2: 0 },
+      winner: null,
     });
     handlePlayerIdUpdate(firestoreGameRef, STARTING_PLAYER_TURN);
   };
@@ -89,6 +93,7 @@ function Tictactoe() {
       setPlayerTurn(firebaseGameObject.playerTurn);
       setRestartTracker(firebaseGameObject.restart);
       setScore(firebaseGameObject.score);
+      setWinner(firebaseGameObject.winner);
     });
     return unsub;
   };
@@ -119,15 +124,6 @@ function Tictactoe() {
     [2, 4, 6], // Diagonal from top-right to bottom-left
   ];
 
-  useEffect(() => {
-    const winner = checkWinner(gameMatrix);
-    if (winner) {
-      setWinner(winner);
-      handleScore(winner);
-      setShowWinnerBanner(true);
-    }
-  }, [playerTurn]);
-
   const handleTurn = (index) => {
     if (gameMatrix[index] === null && playerNumber === playerTurn) {
       const updatedGameMatrix = [...gameMatrix];
@@ -135,6 +131,7 @@ function Tictactoe() {
       const updatedPlayerTurn = playerTurn === 1 ? 2 : 1;
       // firebase updates
       updateFirebaseGameMatrix(updatedGameMatrix, updatedPlayerTurn);
+      checkWinner(updatedGameMatrix);
     }
   };
 
@@ -154,6 +151,11 @@ function Tictactoe() {
         gameMatrix[a] === gameMatrix[b] &&
         gameMatrix[a] === gameMatrix[c]
       ) {
+        handleScore(gameMatrix[a]);
+        setWinner(winner);
+        updateDoc(gameRef, {
+          winner: gameMatrix[a],
+        });
         return gameMatrix[a]; // Return '1' or '2' as the winner
       }
     }
@@ -168,21 +170,21 @@ function Tictactoe() {
   };
 
   useEffect(() => {
-    if (restartTracker) {
-      if (restartTracker[1] && restartTracker[2]) {
-        setShowWinnerBanner(false);
-        setWinner(null);
-        updateFirebaseGameMatrix(STARTING_GAME_MATRIX, STARTING_PLAYER_TURN);
-        updateDoc(gameRef, {
-          restart: { 1: false, 2: false },
-        });
-      }
+    if (restartTracker[1] && restartTracker[2]) {
+      setShowWinnerBanner(false);
+      updateFirebaseGameMatrix(STARTING_GAME_MATRIX, STARTING_PLAYER_TURN);
+      updateDoc(gameRef, {
+        restart: { 1: false, 2: false },
+        winner: null,
+      });
     }
   }, [restartTracker]);
 
   const zeroScore = () => {
     updateFirebaseGameMatrix(STARTING_GAME_MATRIX, STARTING_PLAYER_TURN);
-    setScore({ player1: 0, player2: 0 });
+    updateDoc(gameRef, {
+      score: { player1: 0, player2: 0 },
+    });
   };
 
   return (
@@ -228,7 +230,7 @@ function Tictactoe() {
             gameMode={"tic-tac-toe"}
           />
         ))}
-        {showWinnerBanner && (
+        {winner && (
           <div className="overlay">
             <div className="banner-container">
               <WinnerBanner
