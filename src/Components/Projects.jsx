@@ -8,6 +8,47 @@ function Projects({ projectHidden }) {
   return (
     <div className={`projects-section ${projectHidden ? "hidden" : ""}`}>
       <div className="project-container">
+        <h3>Connect 4</h3>
+        <div className="project-image-container">
+          <a
+            href="https://kwongz.github.io/kwong-portfolio/#/connect4"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img src={connect4Pic} />
+          </a>
+        </div>
+        <div className="project-description-container">
+          <h4>React Firestore Project</h4>
+          <p>
+            <span className="copy-highlight">Refactored</span> and implemented
+            firestore integration from tic-tac-toe for seamless{" "}
+            <span className="copy-highlight">cross browser functionality.</span>{" "}
+            <span className="copy-highlight">Reused Components</span> and
+            multi-directional{" "}
+            <span className="copy-highlight">recursive function</span> for check
+            win logic.
+          </p>
+
+          <a
+            className="project-link"
+            href="https://github.com/kwongz/kwong-portfolio/tree/main/src/gameComponents"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Code
+          </a>
+          <a
+            className="project-link"
+            href="https://kwongz.github.io/kwong-portfolio/#/connect4"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Link
+          </a>
+        </div>
+      </div>
+      <div className="project-container">
         <h3>Tic-Tac-Toe</h3>
         <div className="project-image-container">
           <a
@@ -76,45 +117,6 @@ function Projects({ projectHidden }) {
           <a
             className="project-link"
             href="https://www.genesis.com/ca/en/main.html"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Link
-          </a>
-        </div>
-      </div>
-      <div className="project-container">
-        <h3>Connect 4</h3>
-        <div className="project-image-container">
-          <a
-            href="https://kwongz.github.io/kwong-portfolio/#/connect4"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <img src={connect4Pic} />
-          </a>
-        </div>
-        <div className="project-description-container">
-          <h4>React Project</h4>
-          <p>
-            <span className="copy-highlight">Repurposing</span>{" "}
-            <span className="copy-highlight">components</span> and using a
-            directional{" "}
-            <span className="copy-highlight">recursive function</span> as my
-            checkWin logic. Reuitlizing the recursion for upcoming project
-          </p>
-
-          <a
-            className="project-link"
-            href="https://github.com/kwongz/kwong-portfolio/tree/main/src/gameComponents"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Code
-          </a>
-          <a
-            className="project-link"
-            href="https://kwongz.github.io/kwong-portfolio/#/connect4"
             target="_blank"
             rel="noreferrer"
           >

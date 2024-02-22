@@ -26,7 +26,6 @@ function Connect4() {
 
   const [playerTurn, setPlayerTurn] = useState(STARTING_PLAYER_TURN);
   const [winner, setWinner] = useState(false);
-  // const [showWinnerBanner, setShowWinnerBanner] = useState(false);
   const [score, setScore] = useState({ player1: 0, player2: 0 });
   const [gameMatrix, setGameMatrix] = useState(STARTING_GAME_MATRIX);
   //firebase state
@@ -35,7 +34,6 @@ function Connect4() {
   const [gameRef, setGameRef] = useState("");
   const [playerNumber, setPlayerNumber] = useState(null);
   const [playerId, setPlayerId] = useState(null);
-  const [droppedCoinPos, setDroppedCoinPos] = useState({});
 
   //firebase functions additions
   const generatePlayerId = () => {
@@ -61,7 +59,7 @@ function Connect4() {
         updateDoc(gameRef, {
           [player]: newId,
         });
-        getFirestoreGameData(gameRef);
+        syncFirestoreGameState(gameRef);
         setGameRef(gameRef);
         setShowStartBanner(false);
       } else alert("Game is Full, Please create new game");
@@ -93,7 +91,7 @@ function Connect4() {
     handlePlayerIdUpdate(firestoreGameRef, STARTING_PLAYER_TURN);
   };
 
-  const getFirestoreGameData = async (firestoreGameRef) => {
+  const syncFirestoreGameState = async (firestoreGameRef) => {
     const unsub = onSnapshot(firestoreGameRef, (doc) => {
       const firebaseGameObject = doc.data();
       //firebase does not allow for nested array, we flatten them, and then when we pull the data we restructure back to nested
@@ -112,7 +110,6 @@ function Connect4() {
       setPlayerTurn(firebaseGameObject.playerTurn);
       setRestartTracker(firebaseGameObject.restart);
       setScore(firebaseGameObject.score);
-      // setDroppedCoinPos(firebaseGameObject.droppedCoinPos);
       setWinner(firebaseGameObject.winner);
     });
     return unsub;
@@ -223,7 +220,6 @@ function Connect4() {
     };
 
     let consecutiveCellCount = 0;
-    // const prevPlayer = playerTurn === 1 ? 2 : 1;
 
     // create a recursive function that checks the surrounding cells around the cell that was just updated with a player's move. If there are 4 consecutive cells filled with the same player, return them as the winner
     const checkDirection = (
@@ -362,10 +358,6 @@ function Connect4() {
       true
     );
   }; // End of checkWinner
-
-  // useEffect(() => {
-  //   checkWinner(gameMatrix, droppedCoinPos.row, droppedCoinPos.column);
-  // }, [playerTurn]);
 
   return (
     <div className="connect4-container">
