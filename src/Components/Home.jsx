@@ -149,12 +149,9 @@ function Home() {
                   <p>
                     👋 I'm Kyle, a passionate{" "}
                     <span className="copy-highlight">Front-End Developer</span>{" "}
-                    with over{" "}
-                    <span className="copy-highlight">
-                      3 Years of Experience
-                    </span>
-                    . My expertise lies in crafting delightful user experiences
-                    using technologies like{" "}
+                    with a desire to create seamless, intuitive and user
+                    friendly applications. My expertise lies in using
+                    technologies such as{" "}
                     <span className="copy-highlight">
                       React, JavaScript, HTML
                     </span>
