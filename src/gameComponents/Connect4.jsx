@@ -43,15 +43,15 @@ function Connect4() {
     return playerId;
   };
 
-  const handlePlayerIdUpdate = async (gameRef, playerNumber) => {
+  const handlePlayerIdUpdate = async (docRef, playerNumber) => {
     const player = `player${playerNumber}Id`;
     const newId = generatePlayerId();
     setPlayerId(newId);
     setPlayerNumber(playerNumber);
-    const firebaseCurrentGameDoc = await getDoc(gameRef);
+    const currentDocRef = await getDoc(docRef);
 
-    if (firebaseCurrentGameDoc.data()) {
-      const data = firebaseCurrentGameDoc.data();
+    if (currentDocRef.data()) {
+      const data = currentDocRef.data();
       if (
         (playerNumber === STARTING_PLAYER_TURN && !data.player1Id) ||
         (playerNumber === INVITED_PLAYER_TURN && !data.player2Id)
@@ -93,24 +93,23 @@ function Connect4() {
 
   const syncFirestoreGameState = async (firestoreGameRef) => {
     const unsub = onSnapshot(firestoreGameRef, (doc) => {
-      const firebaseGameObject = doc.data();
-      //firebase does not allow for nested array, we flatten them, and then when we pull the data we restructure back to nested
+      const firebaseGameDoc = doc.data();
       const subArraySize = columns;
       const reNestedArray = [];
       for (
         let i = 0;
-        i < firebaseGameObject.gameMatrix.length;
+        i < firebaseGameDoc.gameMatrix.length;
         i += subArraySize
       ) {
         reNestedArray.push(
-          firebaseGameObject.gameMatrix.slice(i, i + subArraySize)
+          firebaseGameDoc.gameMatrix.slice(i, i + subArraySize)
         );
       }
       setGameMatrix(reNestedArray);
-      setPlayerTurn(firebaseGameObject.playerTurn);
-      setRestartTracker(firebaseGameObject.restart);
-      setScore(firebaseGameObject.score);
-      setWinner(firebaseGameObject.winner);
+      setPlayerTurn(firebaseGameDoc.playerTurn);
+      setRestartTracker(firebaseGameDoc.restart);
+      setScore(firebaseGameDoc.score);
+      setWinner(firebaseGameDoc.winner);
     });
     return unsub;
   };
