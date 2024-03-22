@@ -56,11 +56,11 @@ function Connect4() {
         (playerNumber === STARTING_PLAYER_TURN && !data.player1Id) ||
         (playerNumber === INVITED_PLAYER_TURN && !data.player2Id)
       ) {
-        updateDoc(gameRef, {
+        updateDoc(docRef, {
           [player]: newId,
         });
-        syncFirestoreGameState(gameRef);
-        setGameRef(gameRef);
+        syncFirestoreGameState(docRef);
+        setGameRef(docRef);
         setShowStartBanner(false);
       } else alert("Game is Full, Please create new game");
     } else alert("Game Not Found");
@@ -88,6 +88,7 @@ function Connect4() {
       droppedCoinPos: { row: null, column: null },
       winner: null,
     });
+    // setGameRef(firestoreGameRef);
     handlePlayerIdUpdate(firestoreGameRef, STARTING_PLAYER_TURN);
   };
 
@@ -393,7 +394,6 @@ function Connect4() {
         <h3>{playerNumber ? `you are player ${playerNumber}` : ""}</h3>
       </div>
       <div className="gameboard">{renderBoard()}</div>
-      {console.log(winner)}
       {winner && (
         <div className="overlay">
           <div className="banner-container">

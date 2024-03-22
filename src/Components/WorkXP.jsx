@@ -19,11 +19,14 @@ function ComponentName({ projectHidden }) {
             <ul className="description">
               <li>Cast Member in Harry potter and the cursed Child Toronto</li>
               <li>
-                During off time, continued learning in Javascript and React
+                Exhibited strong teamwork and communication skills in
+                contributing to the success of the largest Canadian play in
+                Canada through effective collaboration with cast, crew,
+                directors, and production staff.
               </li>
               <li>
-                Worked in diverse and large scale production of internationally
-                recognized play
+                Continued Software development learning in React, Node.js,
+                MongoDB working and learning through personal projects
               </li>
             </ul>
           </a>
@@ -39,15 +42,14 @@ function ComponentName({ projectHidden }) {
             </div>
             <ul className="description">
               <li>
-                Worked on new features, built new pages for Genesis Canadian
-                Website
+                Developer Designer Collaboration on webpages, banners and emails
               </li>
               <li>
-                Worked in cooperation with developer, designer, and
-                international teams to deliver ad campaigns
+                Maintained Genesis Canadian Website(AEM, HTML, CSS, Javascript)
               </li>
               <li>
-                Took leadership role during restructuring of development team
+                Daily standup meetings, code reviews & collaborative software
+                development
               </li>
               <li>
                 Efficiently managed multiple projects with tight deadlines,
@@ -68,12 +70,10 @@ function ComponentName({ projectHidden }) {
             </div>
             <ul className="description">
               <li>
-                Created and performed shows with a international cast around the
-                world
-              </li>
-              <li>
-                Rehearsed and created shows in collaboration with Dancers,
-                Divers, Singers and Synchronize Swimmers in 1 month
+                Developed cross-cultural communication, time management,
+                teamwork, problem-solving, and attention to detail skills while
+                collaborating with international teams to swiftly produce and
+                perform in high-quality shows aboard cruise ships.
               </li>
             </ul>
           </a>
