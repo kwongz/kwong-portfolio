@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ResumeButton from "./ResumeButton";
-import resume from "../images/KyleWongResume2024.pdf";
+import resume from "../images/KyleWongResume2025.pdf";
 
 function NavBar() {
   const [mobileNavClosed, setMobileNavClosed] = useState(true);
